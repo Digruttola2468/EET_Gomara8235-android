@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".activity_login"
+    android:background="@drawable/background_login">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <ImageView
+        android:id="@+id/iconGomaraLogin"
+        android:layout_width="350dp"
+        android:layout_height="210dp"
+        android:elevation="10dp"
+        tools:src="@tools:sample/avatars" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <Spinner
+        android:id="@+id/spAnio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/desing_spinner"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Spinner
+        android:id="@+id/spCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/desing_spinner"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:id="@+id/btLogin"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/desing_button"
+        android:textAllCaps="false"
+
+        android:textColor="@color/black"
+        android:textSize="20dp"
+
+        android:elevation="10dp"
+
+        app:backgroundTint="@null"
+        app:backgroundTintMode="add"
+        app:iconTint="#00FFFFFF" />
+
+
+</LinearLayout>
