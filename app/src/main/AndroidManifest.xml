@@ -9,13 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gomara">
-        <activity android:name=".MainActivity">
+
+        <!-- Splash Screen -->
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- LogIn -->
+        <activity android:name=".activity_login"></activity>
+
+        <!-- HORARIOS -->
+        <activity android:name=".view_horarios"></activity>
+
     </application>
 
 </manifest>
