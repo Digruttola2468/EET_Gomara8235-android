@@ -1,4 +1,4 @@
-package com.example.gomara;
+package com.gomara;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.gomara.R;
 import com.ortiz.touchview.TouchImageView;
 
 import java.io.BufferedReader;

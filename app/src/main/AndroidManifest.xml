@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <!-- Splash Screen -->
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.gomara.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,11 +20,11 @@
         </activity>
 
         <!-- LogIn -->
-        <activity android:name=".activity_login"
+        <activity android:name="com.gomara.activity_login"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
         <!-- HORARIOS -->
-        <activity android:name=".view_horarios"
+        <activity android:name="com.gomara.view_horarios"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
     </application>

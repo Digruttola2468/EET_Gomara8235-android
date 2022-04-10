@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center|top"
     android:orientation="vertical"
-    tools:context=".activity_login"
+    tools:context="com.gomara.activity_login"
     android:background="@drawable/background_login">
 
     <Space

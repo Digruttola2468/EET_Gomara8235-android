@@ -1,4 +1,4 @@
-package com.example.gomara;
+package com.gomara;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.gomara.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
