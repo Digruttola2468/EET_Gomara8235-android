@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Gomara">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <!-- Splash Screen -->
         <activity android:name=".SplashScreen">
@@ -20,10 +20,12 @@
         </activity>
 
         <!-- LogIn -->
-        <activity android:name=".activity_login"></activity>
+        <activity android:name=".activity_login"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
         <!-- HORARIOS -->
-        <activity android:name=".view_horarios"></activity>
+        <activity android:name=".view_horarios"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
     </application>
 

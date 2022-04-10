@@ -48,22 +48,23 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
+
     <Button
         android:id="@+id/btLogin"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/desing_button"
+        android:contentDescription="@string/TODO"
+
+        android:elevation="10dp"
         android:textAllCaps="false"
 
         android:textColor="@color/black"
+        android:text="Back"
         android:textSize="20dp"
-
-        android:elevation="10dp"
-
         app:backgroundTint="@null"
         app:backgroundTintMode="add"
         app:iconTint="#00FFFFFF" />
-
 
 </LinearLayout>

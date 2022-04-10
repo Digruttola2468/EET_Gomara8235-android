@@ -16,6 +16,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="100dp"
+        android:contentDescription="@string/TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +31,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/desing_button"
+        android:textColor="@color/black"
         android:text="BACK"
+        android:textSize="20dp"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
