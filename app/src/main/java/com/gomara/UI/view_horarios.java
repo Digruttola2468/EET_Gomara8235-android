@@ -1,4 +1,4 @@
-package com.gomara;
+package com.gomara.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +20,7 @@ public class view_horarios extends Activity {
 
     //widget
     private TouchImageView img;
-    private Button btBack;
+    private Button btBack,btInasistencias;
     private String stringAnio = "",stringCurso = "";
 
     @Override
@@ -31,6 +31,7 @@ public class view_horarios extends Activity {
         //synchrony
         img = findViewById(R.id.ImageViewZoom);
         btBack = findViewById(R.id.btBackViewHorarios);
+        btInasistencias = findViewById(R.id.btInasistencias);
 
         //verificar el archivo
         if(verifyEmpty()){
@@ -47,6 +48,14 @@ public class view_horarios extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( view_horarios.this , activity_login.class );
+                startActivity(i);
+            }
+        });
+
+        btInasistencias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(view_horarios.this, activity_inasistencias.class);
                 startActivity(i);
             }
         });
