@@ -47,6 +47,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/desing_button"
         android:text="INASISTENCIAS"
+        android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:backgroundTint="@null"
