@@ -50,12 +50,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             num_inasistencias = itemView.findViewById(R.id.txt_adapter_inasistencias);
         }
 
-        public void asignarDatoNombre(String s) {
-            nombre.setText(s);
-        }
-        public void asignarDatoInasistencias(Float inasistencias){
-            num_inasistencias.setText(String.valueOf(inasistencias));
-        }
+        public void asignarDatoNombre(String s) { nombre.setText(s); }
+        public void asignarDatoInasistencias(Float inasistencias){ num_inasistencias.setText(String.valueOf(inasistencias)); }
 
         public void ObtenerDatos(){
             //TODO obtener de Firebase los datos de los nombre e inasistencias
