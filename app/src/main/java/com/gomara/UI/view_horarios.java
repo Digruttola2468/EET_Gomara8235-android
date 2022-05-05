@@ -56,6 +56,8 @@ public class view_horarios extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(view_horarios.this, activity_inasistencias.class);
+                i.putExtra("intentAnio",stringAnio);
+                i.putExtra("intentCurso",stringCurso);
                 startActivity(i);
             }
         });

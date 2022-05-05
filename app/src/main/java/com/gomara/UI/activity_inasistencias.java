@@ -1,6 +1,7 @@
 package com.gomara.UI;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -24,8 +25,7 @@ import java.util.ArrayList;
 public class activity_inasistencias extends Activity {
 
     private RecyclerView recyclerView;
-    ArrayList<Alumno> alumnos = new ArrayList<>();
-    getInfo info = new getInfo();
+    private getInfo info = new getInfo();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,16 +35,13 @@ public class activity_inasistencias extends Activity {
         recyclerView = findViewById(R.id.recycler_datos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-        alumnos.add(new Alumno("Ivan Di Gruttola",4.4F));
-        alumnos.add(new Alumno("Santiago Torres",5F));
-        alumnos.add(new Alumno("Cader Lara",10F));
+        String anio = getIntent().getExtras().getString("intentAnio");;
+        String curso = getIntent().getExtras().getString("intentCurso");;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Cursos/6a/Alumnos")
+        db.collection("Cursos/" + anio + curso + "/Alumnos")
                 .get()
                 .addOnCompleteListener(completeListener);
-
 
     }
 
