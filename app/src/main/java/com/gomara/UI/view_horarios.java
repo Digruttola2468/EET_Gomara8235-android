@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gomara.R;
+import com.gomara.Prosecer.Horarios;
 import com.ortiz.touchview.TouchImageView;
 
 import java.io.BufferedReader;
@@ -35,13 +36,9 @@ public class view_horarios extends Activity {
 
         //verificar el archivo
         if(verifyEmpty()){
-            LeerArchivo();//lee el archivo
-            Horarios horarios = new Horarios( stringCurso,stringAnio);  //mandamos los datos
-
-            if(horarios.Image() == 1) Toast.makeText(view_horarios.this,"NO EXISTE", Toast.LENGTH_LONG).show();
-            else img.setImageResource(horarios.Image());
-        }else {
-            Intent i = new Intent( view_horarios.this , activity_login.class );startActivity(i);
+            LeerArchivo();  //lee el archivo
+            Horarios horarios = new Horarios(stringAnio,stringCurso);  //mandamos los datos
+            img.setImageResource(horarios.Image());
         }
 
         btBack.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +63,7 @@ public class view_horarios extends Activity {
 
 
 
-    public void LeerArchivo(){
+    private void LeerArchivo(){
         try {
             BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
 
@@ -81,7 +78,7 @@ public class view_horarios extends Activity {
         }
     }
 
-    public boolean verifyEmpty(){
+    private boolean verifyEmpty(){
         try {
             BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("archivo.txt")));
 
@@ -95,121 +92,5 @@ public class view_horarios extends Activity {
     }
 
 
-static class Horarios {
-
-    private String curso, anio;
-
-    Horarios(String curso, String anio) {
-        this.anio = anio;
-        this.curso = curso;
-    }
-
-    Horarios() {
-    }
-
-    protected boolean isCorrect(String anio, String curso) {
-
-        String allAnios[] = {"1", "2", "3", "4", "5", "6"};
-        String allCursos[] = {"a", "b", "c", "d"};
-
-        boolean isCorrectAnio = false;
-        boolean isCorrectCurso = false;
-
-        //Recorrer todos los anios
-        for (int i = 0; i < allAnios.length; i++)
-            if (anio.equals(allAnios[i])) isCorrectAnio = true;
-
-
-        //Recorrer todos los cursos
-        for (int i = 0; i < allCursos.length; i++)
-            if (curso.equals(allCursos[i])) isCorrectCurso = true;
-
-
-        if (isCorrectAnio && isCorrectCurso) return true;
-        else return false;
-
-    }
-
-    protected int Image() {
-
-        if (anio.equals("1")) {
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_1a;
-                case "b":
-                    return R.drawable.horario_1b;
-                case "c":
-                    return R.drawable.horario_1c;
-                case "d":
-                    return R.drawable.horario_1d;
-            }
-        }
-
-        if (anio.equals("2")) {
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_2a;
-                case "b":
-                    return R.drawable.horario_2b;
-                case "c":
-                    return R.drawable.horario_2c;
-                case "d":
-                    return R.drawable.horario_2d;
-            }
-        }
-
-        if (anio.equals("3")) {
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_3a;
-                case "b":
-                    return R.drawable.horario_3b;
-                case "c":
-                    return R.drawable.horario_3c;
-                case "d":
-                    return R.drawable.horario_3d;
-            }
-        }
-
-        if (anio.equals("4")) {
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_4a;
-                case "b":
-                    return R.drawable.horario_4b;
-                case "c":
-                    return R.drawable.horario_4c;
-                case "d":
-                    return 1;
-            }
-        }
-
-        if (anio.equals("5")) {
-
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_5a;
-                case "b":
-                    return R.drawable.horario_5b;
-                case "c":
-                    return R.drawable.horario_5c;
-                case "d":
-                    return 1;
-            }
-
-        }
-
-        if (anio.equals("6")) {
-
-            switch (curso) {
-                case "a":
-                    return R.drawable.horario_6a;
-            }
-
-        }
-        return 1;
-    }
-
-    }
 
 }

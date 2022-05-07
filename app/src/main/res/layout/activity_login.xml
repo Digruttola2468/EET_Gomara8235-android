@@ -61,7 +61,7 @@
         android:textAllCaps="false"
 
         android:textColor="@color/black"
-        android:text="Back"
+        android:text="Entrar"
         android:textSize="20dp"
         app:backgroundTint="@null"
         app:backgroundTintMode="add"

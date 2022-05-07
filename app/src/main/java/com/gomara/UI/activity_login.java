@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gomara.R;
-import com.gomara.Prosecer.Horarios;
 
 import java.io.BufferedReader;
 import java.io.IOException;
