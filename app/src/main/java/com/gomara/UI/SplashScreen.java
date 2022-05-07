@@ -32,18 +32,17 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 //Si el archivo creado con los datos exite y los recupera , entrar a View_horarios.xml
-                if(verifyEmpty()){
+                if(!verifyEmpty()){
                     LeerArchivo();
                     Intent i = new Intent(SplashScreen.this,view_horarios.class);
                     i.putExtra("intentAnio",stringAnio);
                     i.putExtra("intentCurso",stringCurso);
                     startActivity(i);
-                    finish();
                 }else{
                     Intent i = new Intent(SplashScreen.this , activity_login.class);
                     startActivity(i);
-                    finish();
                 }
+                finish();
             }
         },2000);
 
@@ -52,7 +51,7 @@ public class SplashScreen extends Activity {
     //verificar si esta vacio el archivo
     public boolean verifyEmpty(){
         try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("archivo.txt")));
+            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
 
             if(aux.readLine().equals("")) return true;  //esta vacio
             else return false;                          //esta lleno
@@ -71,8 +70,6 @@ public class SplashScreen extends Activity {
             //Se lee el texto del archivo y se almacena en dos variables
             stringAnio = aux.readLine();
             stringCurso = aux.readLine();
-
-            Toast.makeText(this,"Anio: " + stringAnio + "   " + "Curso: " + stringCurso , Toast.LENGTH_LONG).show();
 
         }catch(IOException e){
             Log.e("Archivo","Error al leer el archivo de la memoria");

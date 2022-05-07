@@ -11,9 +11,6 @@ public class Horarios {
             this.curso = curso;
         }
 
-        Horarios() {
-        }
-
         public int Image() {
 
             if (anio.equals("1")) {

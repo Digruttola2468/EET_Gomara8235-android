@@ -4,8 +4,8 @@ import com.gomara.adapter.Alumno;
 
 import java.util.ArrayList;
 
-public interface sendInfo {
-    void getAlumnos(Alumno alumnos);
+public interface AlumnoView {
+    void setAllAlumnos(Alumno alumnos);
 
     ArrayList<Alumno> getAllAlumnos();
 }

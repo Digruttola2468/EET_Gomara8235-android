@@ -45,6 +45,8 @@ public class view_horarios extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( view_horarios.this , activity_login.class );
+                i.putExtra("stringAnio" ,stringAnio);
+                i.putExtra("stringCurso",stringCurso);
                 startActivity(i);
             }
         });
@@ -70,8 +72,6 @@ public class view_horarios extends Activity {
             //Se lee el texto del archivo y se almacena en dos variables
             stringAnio = aux.readLine();
             stringCurso = aux.readLine();
-
-            Toast.makeText(this,"Anio: " + stringAnio + "   " + "Curso: " + stringCurso , Toast.LENGTH_LONG).show();
 
         }catch(IOException e){
             Log.e("Archivo","Error al leer el archivo de la memoria");

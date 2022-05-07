@@ -77,7 +77,6 @@ public class activity_login extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -91,8 +90,6 @@ public class activity_login extends AppCompatActivity {
                 //Guardar en su dispositivo sus Datos para luego entrar directamente al viewHorarios
                 guardarFichero(Anio,Curso);
                 Intent i = new Intent(activity_login.this , view_horarios.class);
-                i.putExtra("intentAnio",Anio);
-                i.putExtra("intentCurso",Curso);
                 startActivity(i);
             }
         });
