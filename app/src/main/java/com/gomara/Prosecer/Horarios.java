@@ -11,6 +11,11 @@ public class Horarios {
             this.curso = curso;
         }
 
+        public String getModalidad(){
+            //TODO obtener de Firebase si es "TALLER ELECTRONICA"
+            return "";
+        }
+
         public int Image() {
 
             if (anio.equals("1")) {

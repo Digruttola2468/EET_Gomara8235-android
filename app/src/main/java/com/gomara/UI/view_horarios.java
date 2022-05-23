@@ -21,7 +21,7 @@ public class view_horarios extends Activity {
 
     //widget
     private TouchImageView img;
-    private Button btBack,btInasistencias;
+    private Button btBack,btInasistencias,btActivity_main;
     private String stringAnio = "",stringCurso = "";
 
     @Override
@@ -33,6 +33,7 @@ public class view_horarios extends Activity {
         img = findViewById(R.id.ImageViewZoom);
         btBack = findViewById(R.id.btBackViewHorarios);
         btInasistencias = findViewById(R.id.btInasistencias);
+        btActivity_main = findViewById(R.id.bt_activity_main);
 
         //verificar el archivo
         if(verifyEmpty()){
@@ -40,6 +41,14 @@ public class view_horarios extends Activity {
             Horarios horarios = new Horarios(stringAnio,stringCurso);  //mandamos los datos
             img.setImageResource(horarios.Image());
         }
+
+        btActivity_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(view_horarios.this,activity_main.class);
+                startActivity(i);
+            }
+        });
 
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
