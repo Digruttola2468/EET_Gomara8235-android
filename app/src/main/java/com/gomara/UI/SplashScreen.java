@@ -25,7 +25,6 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.splash_sceen);
 
         img2 = findViewById(R.id.imgLogoGomaraSplash);
-
         img2.setImageResource(R.drawable.gomara);
 
         new Handler().postDelayed(new Runnable() {

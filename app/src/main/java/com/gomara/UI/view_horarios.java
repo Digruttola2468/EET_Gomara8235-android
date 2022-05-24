@@ -22,8 +22,8 @@ public class view_horarios extends Activity {
     //widget
     private TouchImageView img;
     private Button btBack,btInasistencias,btActivity_main;
-    private String stringAnio = "",stringCurso = "";
 
+    private String stringAnio = "",stringCurso = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class view_horarios extends Activity {
         btActivity_main = findViewById(R.id.bt_activity_main);
 
         //verificar el archivo
-        if(verifyEmpty()){
+        if(!verifyEmpty()){
             LeerArchivo();  //lee el archivo
             Horarios horarios = new Horarios(stringAnio,stringCurso);  //mandamos los datos
             img.setImageResource(horarios.Image());
@@ -89,7 +89,7 @@ public class view_horarios extends Activity {
 
     private boolean verifyEmpty(){
         try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("archivo.txt")));
+            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
 
             if(aux.readLine().equals("")) return true;  //esta vacio
             else return false;                          //esta lleno

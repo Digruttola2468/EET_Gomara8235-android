@@ -1,4 +1,4 @@
-package com.gomara.adapter;
+package com.gomara.Prosecer;
 
 public class Alumno {
 
@@ -10,20 +10,12 @@ public class Alumno {
         this.inasistencias = inasistencias;
     }
 
+    //GETTERS
     public String getAlumno() {
         return alumno;
     }
-
-    public void setAlumno(String alumno) {
-        this.alumno = alumno;
-    }
-
     public float getInasistencias() {
         return inasistencias;
-    }
-
-    public void setInasistencias(int inasistencias) {
-        this.inasistencias = inasistencias;
     }
 
 }

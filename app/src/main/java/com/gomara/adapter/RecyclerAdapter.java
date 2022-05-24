@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
+import com.gomara.Prosecer.Alumno;
 
 import java.util.ArrayList;
 

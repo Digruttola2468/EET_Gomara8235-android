@@ -28,7 +28,6 @@ public class activity_login extends AppCompatActivity {
     private Spinner spAnio , spCurso;
     private Button    btLogin;
 
-    private String stringAnio,stringCurso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,25 +107,13 @@ public class activity_login extends AppCompatActivity {
 
             archivo.close();
 
-            LeerArchivo();
 
         }catch(IOException e){
             Log.e("Archivo","Error al escribir el archivo a la memoria");
         }
     }
 
-    public void LeerArchivo(){
-        try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
 
-            //Se lee el texto del archivo y se almacena en dos variables
-            stringAnio = aux.readLine();
-            stringCurso = aux.readLine();
-
-        }catch(IOException e){
-            Log.e("Archivo","Error al leer el archivo de la memoria");
-        }
-    }
 
 
 
