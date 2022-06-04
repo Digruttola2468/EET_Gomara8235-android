@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 public class SplashScreen extends Activity {
 
     private ImageView img2;
-    private String stringAnio,stringCurso;
+    //private String stringAnio,stringCurso;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -30,23 +30,14 @@ public class SplashScreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Si el archivo creado con los datos exite y los recupera , entrar a View_horarios.xml
-                if(!verifyEmpty()){
-                    LeerArchivo();
-                    Intent i = new Intent(SplashScreen.this,view_horarios.class);
-                    i.putExtra("intentAnio",stringAnio);
-                    i.putExtra("intentCurso",stringCurso);
-                    startActivity(i);
-                }else{
-                    Intent i = new Intent(SplashScreen.this , activity_login.class);
-                    startActivity(i);
-                }
+                Intent i = new Intent(SplashScreen.this,activity_main.class);
+                startActivity(i);
                 finish();
             }
         },2000);
 
     }
-
+/*
     //verificar si esta vacio el archivo
     public boolean verifyEmpty(){
         try {
@@ -74,5 +65,5 @@ public class SplashScreen extends Activity {
             Log.e("Archivo","Error al leer el archivo de la memoria");
         }
     }
-
+*/
 }

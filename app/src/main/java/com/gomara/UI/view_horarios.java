@@ -21,7 +21,7 @@ public class view_horarios extends Activity {
 
     //widget
     private TouchImageView img;
-    private Button btBack,btInasistencias,btActivity_main;
+    private Button btBack;
 
     private String stringAnio = "",stringCurso = "";
     @Override
@@ -32,8 +32,6 @@ public class view_horarios extends Activity {
         //synchrony
         img = findViewById(R.id.ImageViewZoom);
         btBack = findViewById(R.id.btBackViewHorarios);
-        btInasistencias = findViewById(R.id.btInasistencias);
-        btActivity_main = findViewById(R.id.bt_activity_main);
 
         //verificar el archivo
         if(!verifyEmpty()){
@@ -42,30 +40,10 @@ public class view_horarios extends Activity {
             img.setImageResource(horarios.Image());
         }
 
-        btActivity_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(view_horarios.this,activity_main.class);
-                startActivity(i);
-            }
-        });
-
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent( view_horarios.this , activity_login.class );
-                i.putExtra("stringAnio" ,stringAnio);
-                i.putExtra("stringCurso",stringCurso);
-                startActivity(i);
-            }
-        });
-
-        btInasistencias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(view_horarios.this, activity_inasistencias.class);
-                i.putExtra("intentAnio",stringAnio);
-                i.putExtra("intentCurso",stringCurso);
+                Intent i = new Intent( view_horarios.this , activity_main.class );
                 startActivity(i);
             }
         });

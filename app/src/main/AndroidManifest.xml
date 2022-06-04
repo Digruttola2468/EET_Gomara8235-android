@@ -19,11 +19,6 @@
             </intent-filter>
         </activity>
 
-        <!-- LogIn -->
-        <activity android:name="com.gomara.UI.activity_login"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-
-        <!-- HORARIOS -->
         <activity android:name="com.gomara.UI.view_horarios"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
