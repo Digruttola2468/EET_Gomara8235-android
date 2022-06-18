@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.Horarios;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-public class view_horarios extends Activity {
+public class View_horarios extends Activity {
 
     //widget
     private TouchImageView img;
@@ -43,7 +42,7 @@ public class view_horarios extends Activity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent( view_horarios.this , activity_main.class );
+                Intent i = new Intent( View_horarios.this , Activity_main.class );
                 startActivity(i);
             }
         });

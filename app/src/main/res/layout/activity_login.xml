@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center|top"
-    android:orientation="vertical"
-    tools:context="com.gomara.UI.activity_login"
-    android:background="@drawable/background_login">
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iconGomaraLogin"
-        android:layout_width="350dp"
-        android:layout_height="210dp"
-        android:elevation="10dp"
-        tools:src="@tools:sample/avatars" />
+        android:id="@+id/imageView"
+        android:layout_width="381dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gomara" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
-
-    <Spinner
-        android:id="@+id/spAnio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/desing_spinner"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <Spinner
-        android:id="@+id/spCurso"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/desing_spinner"
-        />
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Email"
+            android:textSize="16dp" />
 
-    <Button
-        android:id="@+id/btLogin"
+        <EditText
+            android:id="@+id/editEmail_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="18dp"
+            android:ems="10"
+            android:hint="example@gmial.com"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/desing_button"
-        android:contentDescription="@string/TODO"
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Password"
+            android:textSize="16dp" />
 
-        android:elevation="10dp"
-        android:textAllCaps="false"
+        <EditText
+            android:id="@+id/editPassword_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ems="10"
+            android:hint="*********"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
 
-        android:textColor="@color/black"
-        android:text="Entrar"
-        android:textSize="20dp"
-        app:backgroundTint="@null"
-        app:backgroundTintMode="add"
-        app:iconTint="#00FFFFFF" />
+        <Button
+            android:id="@+id/bt_iniciarsesion_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Iniciar Sesion" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/bt_registrarse_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Registrarse" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

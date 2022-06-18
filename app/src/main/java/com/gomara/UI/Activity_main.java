@@ -7,25 +7,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
 import com.gomara.adapter.RecyclerAdapterMain;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class activity_main extends AppCompatActivity {
+public class Activity_main extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Spinner sp_anio;
@@ -53,7 +49,7 @@ public class activity_main extends AppCompatActivity {
 
         //Agregamos la lista de años
         String[] anio  = getResources().getStringArray(R.array.ANIO);
-        ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(activity_main.this, R.layout.dropdownitem, anio);
+        ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(Activity_main.this, R.layout.dropdownitem, anio);
         sp_anio.setAdapter(adapterAnio);
 
         sp_anio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,7 +74,7 @@ public class activity_main extends AppCompatActivity {
                     default:
                         throw new IllegalStateException("Unexpected value: " + parent.getItemAtPosition(position).toString());
                 }
-                ArrayAdapter<CharSequence> adapterCurso = new ArrayAdapter<>(activity_main.this, R.layout.dropdownitem, curso);
+                ArrayAdapter<CharSequence> adapterCurso = new ArrayAdapter<>(Activity_main.this, R.layout.dropdownitem, curso);
                 sp_curso.setAdapter(adapterCurso);
             }
 

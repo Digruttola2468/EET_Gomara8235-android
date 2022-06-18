@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class activity_inasistencias extends Activity {
+public class Activity_inasistencias extends Activity {
 
     private RecyclerView recyclerView;
     private ServerFireBase serverFireBase = new ServerFireBase();

@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-
         <!-- Splash Screen -->
         <activity android:name="com.gomara.UI.SplashScreen">
             <intent-filter>
@@ -19,12 +18,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.gomara.UI.view_horarios"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name="com.gomara.UI.View_horarios"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name="com.gomara.UI.activity_inasistencias"></activity>
+        <activity android:name="com.gomara.UI.Activity_inasistencias" />
 
-        <activity android:name="com.gomara.UI.activity_main"></activity>
+        <activity android:name="com.gomara.UI.Activity_main" />
+
+        <activity android:name="com.gomara.UI.Activity_Login" />
+
+        <activity android:name="com.gomara.UI.Activity_Registrarse"></activity>
 
     </application>
 
