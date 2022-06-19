@@ -1,23 +1,19 @@
 package com.gomara.adapter;
 
 import android.content.Intent;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
-import com.gomara.UI.activity_inasistencias;
-import com.gomara.UI.view_horarios;
+import com.gomara.UI.Activity_inasistencias;
+import com.gomara.UI.View_horarios;
 
 import java.util.ArrayList;
 
@@ -54,11 +50,11 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
             public void onClick(View v) {
 
                 if(holder.title.getText().equals("Ver Horarios")){
-                    Intent i = new Intent(holder.itemView.getContext(), view_horarios.class);
+                    Intent i = new Intent(holder.itemView.getContext(), View_horarios.class);
                     holder.itemView.getContext().startActivity(i);
                 }
                 if(holder.title.getText().equals("Inasistencias")){
-                    Intent i = new Intent(holder.itemView.getContext(), activity_inasistencias.class);
+                    Intent i = new Intent(holder.itemView.getContext(), Activity_inasistencias.class);
                     holder.itemView.getContext().startActivity(i);
                 }
                 if(holder.title.getText().equals("Materias")){
