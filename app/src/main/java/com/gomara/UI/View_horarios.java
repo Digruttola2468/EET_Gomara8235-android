@@ -5,10 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.Horarios;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.ortiz.touchview.TouchImageView;
 
 import java.io.BufferedReader;
@@ -21,8 +32,10 @@ public class View_horarios extends Activity {
     //widget
     private TouchImageView img;
     private Button btBack;
+    private Spinner sp_anio,sp_curso;
 
-    private String stringAnio = "",stringCurso = "";
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +44,8 @@ public class View_horarios extends Activity {
         //synchrony
         img = findViewById(R.id.ImageViewZoom);
         btBack = findViewById(R.id.btBackViewHorarios);
-
-        //verificar el archivo
-        if(!verifyEmpty()){
-            LeerArchivo();  //lee el archivo
-            Horarios horarios = new Horarios(stringAnio,stringCurso);  //mandamos los datos
-            img.setImageResource(horarios.Image());
-        }
+        sp_anio = findViewById(R.id.spAnio_viewHorarios);
+        sp_curso = findViewById(R.id.spCurso_viewHorarios);
 
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,36 +55,79 @@ public class View_horarios extends Activity {
             }
         });
 
-    }
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String anio = task.getResult().get("anio").toString();
+                String curso = task.getResult().get("curso").toString();
 
+                Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
+                img.setImageResource(horarios.Image());
+            }
+        });
 
+        /*//Agregamos la lista de años
+        String[] anio  = getResources().getStringArray(R.array.ANIO);
+        ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(View_horarios.this, R.layout.dropdownitem, anio);
+        sp_anio.setAdapter(adapterAnio);
 
-    private void LeerArchivo(){
-        try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
+        sp_anio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] curso;
+                switch (parent.getItemAtPosition(position).toString()){
+                    case "1":
+                    case "2":
+                    case "3":
+                        curso = new String[]{"a","b","c","d"};
+                        break;
 
-            //Se lee el texto del archivo y se almacena en dos variables
-            stringAnio = aux.readLine();
-            stringCurso = aux.readLine();
+                    case "4":
+                    case "5":
+                        curso = new String[]{"a", "b", "c"};
+                        break;
 
-        }catch(IOException e){
-            Log.e("Archivo","Error al leer el archivo de la memoria");
+                    case "6":
+                        curso = new String[]{"a"};
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + parent.getItemAtPosition(position).toString());
+                }
+                ArrayAdapter<CharSequence> adapterCurso = new ArrayAdapter<>(View_horarios.this, R.layout.dropdownitem, curso);
+                sp_curso.setAdapter(adapterCurso);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        sp_curso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String anio = sp_anio.getSelectedItem().toString();
+                String curso = sp_curso.getSelectedItem().toString();
+
+                Toast.makeText(View_horarios.this,"Anio: " + anio + " Curso: " + curso, Toast.LENGTH_SHORT).show();
+
+                Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
+                img.setImageResource(horarios.Image());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });*/
+
+        if(sp_curso.isClickable()){
+           Log.d("Log","TOCO");
         }
+
     }
-
-    private boolean verifyEmpty(){
-        try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
-
-            if(aux.readLine().equals("")) return true;  //esta vacio
-            else return false;                          //esta lleno
-
-        }catch(IOException e){
-            Log.e("Archivo","Error al leer el archivo de la memoria");
-            return true; //Esta vacio el archivo
-        }
-    }
-
 
 
 }

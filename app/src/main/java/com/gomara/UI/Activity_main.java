@@ -1,13 +1,18 @@
 package com.gomara.UI;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
 import com.gomara.adapter.RecyclerAdapterMain;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -24,8 +35,9 @@ import java.util.ArrayList;
 public class Activity_main extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Spinner sp_anio;
-    private Spinner sp_curso;
+    private TextView txtNombre,txtCurso,txtAnio;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button btCerrarSesion;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +45,10 @@ public class Activity_main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView_main);
-        sp_anio = findViewById(R.id.spinner_main_anio);
-        sp_curso = findViewById(R.id.spinner_main_curso);
+        txtNombre = findViewById(R.id.txtNombre_main);
+        txtCurso = findViewById(R.id.txtCurso_main);
+        txtAnio = findViewById(R.id.txtAnio_main);
+        btCerrarSesion = findViewById(R.id.btCerrarSesion_main);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         ArrayList<ListaMain> lista = new ArrayList<>();
@@ -47,58 +61,43 @@ public class Activity_main extends AppCompatActivity {
         RecyclerAdapterMain adapter = new RecyclerAdapterMain(lista);
         recyclerView.setAdapter(adapter);
 
-        //Agregamos la lista de años
-        String[] anio  = getResources().getStringArray(R.array.ANIO);
-        ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(Activity_main.this, R.layout.dropdownitem, anio);
-        sp_anio.setAdapter(adapterAnio);
-
-        sp_anio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String[] curso;
-                switch (parent.getItemAtPosition(position).toString()){
-                    case "1":
-                    case "2":
-                    case "3":
-                        curso = new String[]{"a","b","c","d"};
-                        break;
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
 
-                    case "4":
-                    case "5":
-                        curso = new String[]{"a", "b", "c"};
-                        break;
+                    String nombre = task.getResult().getString("nombre");
+                    String curso = task.getResult().getString("curso");
+                    String anio = task.getResult().getString("anio");
 
-                    case "6":
-                        curso = new String[]{"a"};
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + parent.getItemAtPosition(position).toString());
+                    Log.d("Tag","nombre: " + nombre + " Curso: " + curso + "anio: " + anio);
+
+                    txtNombre.setText(nombre);
+                    txtCurso.setText(curso);
+                    txtAnio.setText(anio);
                 }
-                ArrayAdapter<CharSequence> adapterCurso = new ArrayAdapter<>(Activity_main.this, R.layout.dropdownitem, curso);
-                sp_curso.setAdapter(adapterCurso);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        sp_curso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        btCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String Anio = sp_anio.getSelectedItem().toString();
-                String Curso = sp_curso.getSelectedItem().toString();
+            public void onClick(View view) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
 
-                guardarFichero(Anio,Curso);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                Intent i = new Intent(Activity_main.this, Activity_Login.class);
+                startActivity(i);
             }
         });
 
     }
+
+
+
+    /*
     public void guardarFichero(String anio, String curso){
         try {
 
@@ -115,5 +114,5 @@ public class Activity_main extends AppCompatActivity {
         }catch(IOException e){
             Log.e("Archivo","Error al escribir el archivo a la memoria");
         }
-    }
+    }*/
 }

@@ -15,12 +15,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gomara.R;
+import com.gomara.Server.FirebaseAutentication;
+import com.gomara.dialog.AlertDialogs;
 
 public class Activity_Registrarse extends AppCompatActivity {
 
     private Button btVolver,btRegistrarse;
     private EditText editEmail,editNewPassword,editResetPassword,editName,editNickname;
     private Spinner sp_anio,sp_curso;
+
+    private FirebaseAutentication autentication = new FirebaseAutentication();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +55,26 @@ public class Activity_Registrarse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isEmpy() && isEquals()){
-                    Toast.makeText(Activity_Registrarse.this, "Correcto", Toast.LENGTH_SHORT).show();
+                    String email = editEmail.getText().toString();
+                    String password = editNewPassword.getText().toString();
+                    String nombre = editName.getText().toString();
+                    String apellido = editNickname.getText().toString();
+                    String anio = sp_anio.getSelectedItem().toString();
+                    String curso = sp_curso.getSelectedItem().toString();
+
+
+                    String mensaje =
+                            "Email: " + email + "\n" +
+                            "Password: " + password + "\n" +
+                            "Nombre: " + nombre + "\n" +
+                            "Apellido: " + apellido + "\n" +
+                            "Anio: " + anio + "\n" +
+                            "Curso: " + curso;
+
+                    AlertDialogs dialogs = new AlertDialogs("Info",mensaje);
+                    dialogs.show(getSupportFragmentManager(),"TAG");
+
+                    autentication.SignUp(getSupportFragmentManager(),email,password,nombre,apellido,anio,curso);
                 }
             }
         });
@@ -89,20 +112,6 @@ public class Activity_Registrarse extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        sp_curso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String Anio = sp_anio.getSelectedItem().toString();
-                String Curso = sp_curso.getSelectedItem().toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
