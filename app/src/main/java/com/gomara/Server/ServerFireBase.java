@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gomara.Prosecer.Alumno;
 import com.gomara.Prosecer.Comunicado;
+import com.gomara.Prosecer.Materias;
 import com.gomara.adapter.RecyclerAdapter;
 import com.gomara.adapter.RecyclerAdapterComunicados;
+import com.gomara.adapter.RecyclerAdapterMaterias;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,7 +46,7 @@ public class ServerFireBase {
     }
 
     public void leerComunicados(RecyclerView recyclerView,String anio, String curso){
-        db.collection("Comunicado/" + anio + curso + "/Informacion")
+        db.collection("Cursos/" + anio + curso + "/Comunicados")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -59,6 +61,29 @@ public class ServerFireBase {
 
                             RecyclerAdapterComunicados adapter = new RecyclerAdapterComunicados(allComunicados);
                             recyclerView.setAdapter(adapter);
+                        }else
+                            Log.w("","Error getting documents." , task.getException());
+                    }
+                });
+    }
+
+    public void leerMaterias(RecyclerView recyclerView,String anio, String curso){
+        db.collection("Cursos/" + anio + curso + "/Materias")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+
+                            ArrayList<Materias> allMaterias = new ArrayList<>();
+
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                allMaterias.add(new Materias(document.getString("materia")));
+                            }
+
+                            RecyclerAdapterMaterias adapter = new RecyclerAdapterMaterias(allMaterias);
+                            recyclerView.setAdapter(adapter);
+
                         }else
                             Log.w("","Error getting documents." , task.getException());
                     }

@@ -32,6 +32,8 @@
         <activity android:name="com.gomara.UI.Activity_Registrarse" />
 
         <activity android:name="com.gomara.UI.Activity_comunicados"/>
+
+        <activity android:name="com.gomara.UI.Activity_materias"/>
     </application>
 
 </manifest>
