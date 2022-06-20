@@ -15,7 +15,7 @@ public class SplashScreen extends Activity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_sceen);
+        setContentView(R.layout.activity_splash_sceen);
 
         img2 = findViewById(R.id.imgLogoGomaraSplash);
         img2.setImageResource(R.drawable.gomara);
