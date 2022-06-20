@@ -67,7 +67,7 @@ public class View_horarios extends Activity {
             }
         });
 
-        /*//Agregamos la lista de años
+        //Agregamos la lista de años
         String[] anio  = getResources().getStringArray(R.array.ANIO);
         ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(View_horarios.this, R.layout.dropdownitem, anio);
         sp_anio.setAdapter(adapterAnio);
@@ -121,11 +121,8 @@ public class View_horarios extends Activity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });*/
+        });
 
-        if(sp_curso.isClickable()){
-           Log.d("Log","TOCO");
-        }
 
     }
 

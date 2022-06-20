@@ -10,4 +10,5 @@
 
     <color name="azul">#C61900FF</color>
     <color name="celeste">#E600FFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
