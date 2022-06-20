@@ -1,6 +1,9 @@
 package com.gomara.UI;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -43,13 +46,22 @@ public class Activity_inasistencias extends Activity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        ProgressDialog progressDialog = new ProgressDialog(Activity_inasistencias.this);
+        progressDialog.create();
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.show();
+
         db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String anio = task.getResult().get("anio").toString();
-                String curso = task.getResult().get("curso").toString();
+                if(task.isSuccessful()){
+                    progressDialog.dismiss();
+                    String anio = task.getResult().get("anio").toString();
+                    String curso = task.getResult().get("curso").toString();
 
-                serverFireBase.leerInasistencias(recyclerView,anio,curso );
+                    serverFireBase.leerInasistencias(recyclerView,anio,curso );
+                }
             }
         });
 

@@ -4,7 +4,7 @@
     <string name="TODO">TODO</string>
 
     <string-array name="ANIO">
-
+        <item> - </item>
         <item> 1 </item>
         <item> 2 </item>
         <item> 3 </item>

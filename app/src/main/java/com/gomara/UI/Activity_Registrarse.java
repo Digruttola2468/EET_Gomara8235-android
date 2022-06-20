@@ -1,6 +1,9 @@
 package com.gomara.UI;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +57,7 @@ public class Activity_Registrarse extends AppCompatActivity {
         btRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isEmpy() && isEquals()){
+                if(isEmpy() && isEquals()){
                     String email = editEmail.getText().toString();
                     String password = editNewPassword.getText().toString();
                     String nombre = editName.getText().toString();
@@ -62,7 +65,7 @@ public class Activity_Registrarse extends AppCompatActivity {
                     String anio = sp_anio.getSelectedItem().toString();
                     String curso = sp_curso.getSelectedItem().toString();
 
-
+                    /*
                     String mensaje =
                             "Email: " + email + "\n" +
                             "Password: " + password + "\n" +
@@ -71,10 +74,16 @@ public class Activity_Registrarse extends AppCompatActivity {
                             "Anio: " + anio + "\n" +
                             "Curso: " + curso;
 
-                    AlertDialogs dialogs = new AlertDialogs("Info",mensaje);
-                    dialogs.show(getSupportFragmentManager(),"TAG");
+                    AlertDialogs dialogs = new AlertDialogs("New User",mensaje);
+                    dialogs.show(getSupportFragmentManager(),"TAG");*/
 
-                    autentication.SignUp(getSupportFragmentManager(),email,password,nombre,apellido,anio,curso);
+                    ProgressDialog progressDialog = new ProgressDialog(Activity_Registrarse.this);
+                    progressDialog.create();
+                    progressDialog.setContentView(R.layout.progress_dialog);
+                    progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    progressDialog.show();
+
+                    autentication.SignUp(progressDialog,getSupportFragmentManager(),email,password,nombre,apellido,anio,curso);
                 }
             }
         });
@@ -89,6 +98,9 @@ public class Activity_Registrarse extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] curso;
                 switch (parent.getItemAtPosition(position).toString()){
+                    case "-":
+                        curso = new String[]{"-"};
+                        break;
                     case "1":
                     case "2":
                     case "3":
@@ -117,14 +129,14 @@ public class Activity_Registrarse extends AppCompatActivity {
 
     }
 
-
-
     private boolean isEmpy(){
-        return editEmail.getText().equals("") &&
-                editNewPassword.getText().equals("") &&
-                editResetPassword.getText().equals("") &&
-                editName.getText().equals("") &&
-                editNickname.getText().equals("");
+        return  !editEmail.getText().equals("") &&
+                !editNewPassword.getText().equals("") &&
+                !editResetPassword.getText().equals("") &&
+                !editName.getText().equals("") &&
+                !editNickname.getText().equals("") &&
+                !sp_anio.getSelectedItem().toString().equals("-") &&
+                !sp_curso.getSelectedItem().toString().equals("-");
     }
 
     private boolean isEquals(){

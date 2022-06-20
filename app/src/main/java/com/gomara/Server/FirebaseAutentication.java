@@ -1,5 +1,6 @@
 package com.gomara.Server;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -25,7 +26,7 @@ public class FirebaseAutentication {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    public void SignUp(FragmentManager manager,String email,String password,String nombre,String apellido,String anio,String curso){
+    public void SignUp(ProgressDialog dialog, FragmentManager manager, String email, String password, String nombre, String apellido, String anio, String curso){
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -42,6 +43,7 @@ public class FirebaseAutentication {
                     db.collection("User").document(task.getResult().getUser().getUid()).set(mapeo).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            dialog.dismiss();
                             AlertDialogs dialogs = new AlertDialogs("SignUp","Se agrego correctamente");
                             dialogs.show(manager,null);
                         }

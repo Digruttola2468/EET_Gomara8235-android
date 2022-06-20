@@ -1,7 +1,10 @@
 package com.gomara.UI;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,18 +58,6 @@ public class View_horarios extends Activity {
             }
         });
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                String anio = task.getResult().get("anio").toString();
-                String curso = task.getResult().get("curso").toString();
-
-                Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
-                img.setImageResource(horarios.Image());
-            }
-        });
-
         //Agregamos la lista de años
         String[] anio  = getResources().getStringArray(R.array.ANIO);
         ArrayAdapter<CharSequence> adapterAnio = new ArrayAdapter<>(View_horarios.this, R.layout.dropdownitem, anio);
@@ -77,6 +68,9 @@ public class View_horarios extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] curso;
                 switch (parent.getItemAtPosition(position).toString()){
+                    case "-":
+                        curso = new String[]{"-"};
+                        break;
                     case "1":
                     case "2":
                     case "3":
@@ -110,10 +104,12 @@ public class View_horarios extends Activity {
                 String anio = sp_anio.getSelectedItem().toString();
                 String curso = sp_curso.getSelectedItem().toString();
 
-                Toast.makeText(View_horarios.this,"Anio: " + anio + " Curso: " + curso, Toast.LENGTH_SHORT).show();
+                if(!anio.equals("-") && !curso.equals("-")){
+                    Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
+                    img.setImageResource(horarios.Image());
+                }
 
-                Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
-                img.setImageResource(horarios.Image());
+
 
             }
 
@@ -123,6 +119,28 @@ public class View_horarios extends Activity {
             }
         });
 
+        ProgressDialog progressDialog = new ProgressDialog(View_horarios.this);
+        progressDialog.create();
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.show();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    progressDialog.dismiss();
+
+                    String anio = task.getResult().get("anio").toString();
+                    String curso = task.getResult().get("curso").toString();
+
+                    Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
+                    img.setImageResource(horarios.Image());
+                }
+
+            }
+        });
 
     }
 
