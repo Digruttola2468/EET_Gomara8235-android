@@ -8,6 +8,7 @@
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3395" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/drawable/bg_round.xml" value="0.223" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3395" />
+        <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/activity_comunicados.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/activity_inasistencias.xml" value="0.33" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/activity_login.xml" value="0.3101851851851852" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/inasistencias_adapter.xml" value="0.33" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/item_inasistencia.xml" value="0.3037037037037037" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/progress_dialog.xml" value="0.25" />
+        <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/recycler_comunicados_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/recycler_main_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/splash_sceen.xml" value="0.3101851851851852" />
         <entry key="..\:/Users/ivans/AndroidProyectStudio/Gomara/app/src/main/res/layout/tumama.xml" value="0.33" />

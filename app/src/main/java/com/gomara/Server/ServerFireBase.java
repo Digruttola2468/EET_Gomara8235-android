@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gomara.Prosecer.Alumno;
+import com.gomara.Prosecer.Comunicado;
 import com.gomara.adapter.RecyclerAdapter;
+import com.gomara.adapter.RecyclerAdapterComunicados;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,8 +43,26 @@ public class ServerFireBase {
                 });
     }
 
-    public void get(){
+    public void leerComunicados(RecyclerView recyclerView,String anio, String curso){
+        db.collection("Comunicado/" + anio + curso + "/Informacion")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
 
+                            ArrayList<Comunicado> allComunicados = new ArrayList<>();
+
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                allComunicados.add(new Comunicado(document.getString("title"),document.getString("contenido")));
+                            }
+
+                            RecyclerAdapterComunicados adapter = new RecyclerAdapterComunicados(allComunicados);
+                            recyclerView.setAdapter(adapter);
+                        }else
+                            Log.w("","Error getting documents." , task.getException());
+                    }
+                });
     }
 
 
