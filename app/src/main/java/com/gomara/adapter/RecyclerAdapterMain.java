@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
+import com.gomara.UI.Activity_comunicados;
 import com.gomara.UI.Activity_inasistencias;
 import com.gomara.UI.View_horarios;
 
@@ -19,17 +20,9 @@ import java.util.ArrayList;
 
 public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMain.ViewHolder>{
 
-    private ArrayList<ListaMain> codigos = new ArrayList<>();
+    private ArrayList<ListaMain> codigos;
     public RecyclerAdapterMain(ArrayList<ListaMain> codigos){
         this.codigos = codigos;
-    }
-
-    private String anio;
-    private String curso;
-    public RecyclerAdapterMain(ArrayList<ListaMain> codigos,String anio,String curso){
-        this.codigos = codigos;
-        this.anio = anio;
-        this.curso = curso;
     }
 
     @NonNull
@@ -57,8 +50,9 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
                     Intent i = new Intent(holder.itemView.getContext(), Activity_inasistencias.class);
                     holder.itemView.getContext().startActivity(i);
                 }
-                if(holder.title.getText().equals("Materias")){
-
+                if(holder.title.getText().equals("Comunidados")){
+                    Intent i = new Intent(holder.itemView.getContext(), Activity_comunicados.class);
+                    holder.itemView.getContext().startActivity(i);
                 }
             }
         });
@@ -68,7 +62,6 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     public int getItemCount() {
         return codigos.size();
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

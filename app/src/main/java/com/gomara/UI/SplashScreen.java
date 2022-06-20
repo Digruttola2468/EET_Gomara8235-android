@@ -11,7 +11,6 @@ import com.example.gomara.R;
 public class SplashScreen extends Activity {
 
     private ImageView img2;
-    //private String stringAnio,stringCurso;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -31,33 +30,5 @@ public class SplashScreen extends Activity {
         },2000);
 
     }
-/*
-    //verificar si esta vacio el archivo
-    public boolean verifyEmpty(){
-        try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
 
-            if(aux.readLine().equals("")) return true;  //esta vacio
-            else return false;                          //esta lleno
-
-        }catch(IOException e){
-            Log.e("Archivo","Error al leer el archivo de la memoria");
-            return true; //Esta vacio el archivo
-        }
-    }
-
-    //Lee el archivo
-    public void LeerArchivo(){
-        try {
-            BufferedReader aux = new BufferedReader(new InputStreamReader(openFileInput("Gomara.txt")));
-
-            //Se lee el texto del archivo y se almacena en dos variables
-            stringAnio = aux.readLine();
-            stringCurso = aux.readLine();
-
-        }catch(IOException e){
-            Log.e("Archivo","Error al leer el archivo de la memoria");
-        }
-    }
-*/
 }
