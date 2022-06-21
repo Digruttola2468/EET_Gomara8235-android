@@ -14,20 +14,29 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gomara.R;
 import com.gomara.Server.FirebaseAutentication;
 import com.gomara.dialog.AlertDialogs;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_Registrarse extends AppCompatActivity {
 
     private Button btVolver,btRegistrarse;
     private EditText editEmail,editNewPassword,editResetPassword,editName,editNickname;
     private Spinner sp_anio,sp_curso;
-
-    private FirebaseAutentication autentication = new FirebaseAutentication();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,8 +92,46 @@ public class Activity_Registrarse extends AppCompatActivity {
                     progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     progressDialog.show();
 
-                    autentication.SignUp(progressDialog,getSupportFragmentManager(),email,password,nombre,apellido,anio,curso);
-                }
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Log.d("TAG","Email: " + email + "  Nombre: " + nombre + "  Anio: " + anio + "  Curso: " + curso);
+
+                                Map<String,String> mapeo = new HashMap<>();
+                                mapeo.put("email",email);
+                                mapeo.put("nombre",nombre);
+                                mapeo.put("apellido",apellido);
+                                mapeo.put("anio",anio);
+                                mapeo.put("curso",curso);
+
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("User").document(task.getResult().getUser().getUid()).set(mapeo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.dismiss();
+
+                                        AlertDialogs dialogs = new AlertDialogs("SignUp","Se agrego correctamente");
+                                        dialogs.show(getSupportFragmentManager(),null);
+
+                                        cleanEditTexts();
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            AlertDialogs dialogs = new AlertDialogs("Error",e.getMessage());
+                            dialogs.show(getSupportFragmentManager(),null);
+                        }
+                    });
+                }else if(!isEquals())
+                    Toast.makeText(Activity_Registrarse.this, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show();
             }
         });
 
