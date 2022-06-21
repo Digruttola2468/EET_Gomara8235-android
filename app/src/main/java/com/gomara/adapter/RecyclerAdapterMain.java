@@ -14,6 +14,7 @@ import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
 import com.gomara.UI.Activity_comunicados;
 import com.gomara.UI.Activity_inasistencias;
+import com.gomara.UI.Activity_materias;
 import com.gomara.UI.View_horarios;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMain.ViewHolder>{
 
     private ArrayList<ListaMain> codigos;
+
     public RecyclerAdapterMain(ArrayList<ListaMain> codigos){
         this.codigos = codigos;
     }
@@ -54,6 +56,11 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
                     Intent i = new Intent(holder.itemView.getContext(), Activity_comunicados.class);
                     holder.itemView.getContext().startActivity(i);
                 }
+                if(holder.title.getText().equals("Materias")){
+                    Intent i = new Intent(holder.itemView.getContext(), Activity_materias.class);
+                    holder.itemView.getContext().startActivity(i);
+                }
+
             }
         });
     }
