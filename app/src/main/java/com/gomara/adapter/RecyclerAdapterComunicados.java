@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class RecyclerAdapterComunicados extends RecyclerView.Adapter<RecyclerAdapterComunicados.ViewHolder>{
 
-    ArrayList<Comunicado> comunicados;
+    private ArrayList<Comunicado> comunicados;
 
     public RecyclerAdapterComunicados(ArrayList comunicados){
         this.comunicados = comunicados;

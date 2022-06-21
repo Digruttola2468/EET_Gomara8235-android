@@ -57,11 +57,10 @@ public class Activity_main extends AppCompatActivity {
         lista.add(new ListaMain(R.drawable.image_horarios,"Ver Horarios"));
         lista.add(new ListaMain(R.drawable.comunicado_image,"Comunidados"));
         lista.add(new ListaMain(R.drawable.materias,"Materias"));
-        lista.add(new ListaMain(R.drawable.libreta,"Libretas"));
+        //lista.add(new ListaMain(R.drawable.libreta,"Libretas"));
 
         RecyclerAdapterMain adapter = new RecyclerAdapterMain(lista);
         recyclerView.setAdapter(adapter);
-
 
         btCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +102,7 @@ public class Activity_main extends AppCompatActivity {
                                     "Nombre: " + nombre + "\n" +
                                     "Apellido: " + apellido + "\n" +
                                     "Email: " + email + "\n" +
-                                    "Año: " + anio + " Curso: " + curso;
+                                    "Año: " + anio + " Curso: " + curso.toUpperCase();
 
                             AlertDialogs dialogs = new AlertDialogs("My profile",mensaje);
                             dialogs.show(getSupportFragmentManager(),null);
