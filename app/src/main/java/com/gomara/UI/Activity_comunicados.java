@@ -15,22 +15,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
-import com.gomara.Server.ServerFireBase;
+import com.gomara.Presenter.ComunicadoPresenter;
+import com.gomara.Presenter.ComunicadoPresenterImp;
+import com.gomara.Prosecer.Comunicado;
+import com.gomara.adapter.RecyclerAdapterComunicados;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Activity_comunicados extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Activity_comunicados extends AppCompatActivity implements ComunicadoView {
 
     private RecyclerView recyclerView;
     private Button btVolver;
+
+    private ComunicadoPresenter couponPresenter = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comunicados);
+        getSupportActionBar().hide();
+
+        couponPresenter = new ComunicadoPresenterImp(this);
 
         recyclerView = findViewById(R.id.recyclerView_comunicados);
         btVolver = findViewById(R.id.btVolver_comunicados);
@@ -62,10 +72,24 @@ public class Activity_comunicados extends AppCompatActivity {
                     String anio = task.getResult().get("anio").toString();
                     String curso = task.getResult().get("curso").toString();
 
-                    new ServerFireBase().leerComunicados(recyclerView,anio,curso );
+                    getComunicado(anio,curso);
                 }
             }
         });
 
+
+    }
+
+    //Controler
+    @Override
+    public void showComunicado(ArrayList<Comunicado> coupon) {
+        RecyclerAdapterComunicados adapter = new RecyclerAdapterComunicados(coupon);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void getComunicado(String anio,String curso) {
+        couponPresenter.getCoupons(anio,curso);
     }
 }
