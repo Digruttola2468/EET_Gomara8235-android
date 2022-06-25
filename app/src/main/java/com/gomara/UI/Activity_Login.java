@@ -1,6 +1,9 @@
 package com.gomara.UI;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,10 +29,11 @@ public class Activity_Login extends AppCompatActivity implements ActivityLoginVi
 
     private EditText editEmail,editPassword;
     private Button btLogIn,btRegistrer;
-
+    private ProgressDialog progressDialog;
     private ActivityLoginPresenter presenter;
 
     private int conta = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,12 @@ public class Activity_Login extends AppCompatActivity implements ActivityLoginVi
                 if(isEmpty()){
                     String email = editEmail.getText().toString();
                     String password = editPassword.getText().toString();
+
+                    progressDialog = new ProgressDialog(Activity_Login.this);
+                    progressDialog.create();
+                    progressDialog.setContentView(R.layout.progress_dialog);
+                    progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    progressDialog.show();
 
                     IniciarSesion(email,password);
                 }
@@ -87,6 +97,7 @@ public class Activity_Login extends AppCompatActivity implements ActivityLoginVi
 
     @Override
     public void onSuccess(String userId) {
+        progressDialog.dismiss();
         Intent i = new Intent(Activity_Login.this, Activity_main.class);
         i.putExtra("User",userId);
         startActivity(i);
