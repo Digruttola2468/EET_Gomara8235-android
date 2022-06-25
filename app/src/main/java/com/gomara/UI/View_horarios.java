@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 
 import com.example.gomara.R;
+import com.gomara.Presenter.ViewHorariosPresenter;
+import com.gomara.Presenter.ViewHorariosPresenterImpl;
 import com.gomara.Prosecer.Horarios;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,15 +26,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.ortiz.touchview.TouchImageView;
 
 
-public class View_horarios extends Activity {
+public class View_horarios extends Activity implements ViewHorariosView{
 
     //widget
     private TouchImageView img;
     private Button btBack;
     private Spinner sp_anio,sp_curso;
 
+    private ProgressDialog progressDialog;
+    private ViewHorariosPresenter viewHorariosPresenter;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,30 +116,32 @@ public class View_horarios extends Activity {
             }
         });
 
-        ProgressDialog progressDialog = new ProgressDialog(View_horarios.this);
+        viewHorariosPresenter = new ViewHorariosPresenterImpl(this);
+
+        progressDialog = new ProgressDialog(View_horarios.this);
         progressDialog.create();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.show();
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
+        getAnioCurso(auth.getUid().toString());
 
-                    String anio = task.getResult().get("anio").toString();
-                    String curso = task.getResult().get("curso").toString();
 
-                    Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
-                    img.setImageResource(horarios.Image());
-                }
-
-            }
-        });
 
     }
 
 
+    @Override
+    public void showAnioCurso(String anio, String curso) {
+        progressDialog.dismiss();
+
+        Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
+        img.setImageResource(horarios.Image());
+    }
+
+    @Override
+    public void getAnioCurso(String uid) {
+        viewHorariosPresenter.getAnioCurso(uid);
+    }
 }
