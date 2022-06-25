@@ -40,7 +40,6 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
         presenter = new MateriasPresenterImpl(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         progressDialog = new ProgressDialog(Activity_materias.this);
         progressDialog.create();
         progressDialog.setContentView(R.layout.progress_dialog);

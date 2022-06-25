@@ -37,7 +37,7 @@ public class MateriasServerImpl implements MateriasServer{
                             ArrayList<Materias> allMaterias = new ArrayList<>();
 
                             for(QueryDocumentSnapshot document : task.getResult()){
-                                allMaterias.add(new Materias(document.getString("materia")));
+                                allMaterias.add(new Materias(document.getString("materia"),document.getString("evaluacion")));
                             }
 
                             materiasPresenter.showMaterias(allMaterias);

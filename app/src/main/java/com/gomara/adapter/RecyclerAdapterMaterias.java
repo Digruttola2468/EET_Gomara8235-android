@@ -33,6 +33,7 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setMateria(materias.get(position).getMateria());
+        holder.setFechaEvaluacion(materias.get(position).getFechaPrueba());
     }
 
     @Override
@@ -42,17 +43,20 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView materia;
+        private TextView materia,fechaEvaluacion;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             materia = itemView.findViewById(R.id.txtMateria_materia);
+            fechaEvaluacion = itemView.findViewById(R.id.txtFechaEvaluacion_materia);
         }
 
         void setMateria(String stringtitle){
             materia.setText(stringtitle);
         }
-
+        void setFechaEvaluacion(String fecha){
+            fechaEvaluacion.setText("Evaluacion: " + fecha);
+        }
     }
 }
 
