@@ -14,17 +14,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
+import com.gomara.Presenter.MateriasPresenter;
+import com.gomara.Prosecer.Materias;
 import com.gomara.Server.ServerFireBase;
+import com.gomara.adapter.RecyclerAdapterMaterias;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Activity_materias extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Activity_materias extends AppCompatActivity implements MateriasView{
 
     private RecyclerView recyclerView;
     private Button btVolver;
+
+    private MateriasPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,10 +65,21 @@ public class Activity_materias extends AppCompatActivity {
                     String anio = task.getResult().get("anio").toString();
                     String curso = task.getResult().get("curso").toString();
 
-                    new ServerFireBase().leerMaterias(recyclerView,anio,curso);
+                    getMaterias(anio,curso);
                 }
             }
         });
 
+    }
+
+    @Override
+    public void showMaterias(ArrayList<Materias> allMaterias) {
+        RecyclerAdapterMaterias adapter = new RecyclerAdapterMaterias(allMaterias);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void getMaterias(String anio, String curso) {
+        presenter.getMaterias(anio,curso);
     }
 }
