@@ -2,28 +2,34 @@ package com.gomara.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gomara.R;
-import com.gomara.Server.FirebaseAutentication;
+import com.gomara.Presenter.ActivityLoginPresenter;
+import com.gomara.Presenter.ActivityLoginPresenterImpl;
 import com.gomara.dialog.AlertDialogs;
+import com.gomara.dialog.ChooseDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Activity_Login extends AppCompatActivity {
+public class Activity_Login extends AppCompatActivity implements ActivityLoginView{
 
     private EditText editEmail,editPassword;
     private Button btLogIn,btRegistrer;
 
-    private FirebaseAutentication autentication = new FirebaseAutentication();
+    private ActivityLoginPresenter presenter;
 
+    private int conta = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class Activity_Login extends AppCompatActivity {
         btLogIn         = findViewById(R.id.bt_iniciarsesion_login);
         btRegistrer     = findViewById(R.id.bt_registrarse_login);
 
+        presenter = new ActivityLoginPresenterImpl(this);
 
         btRegistrer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +56,8 @@ public class Activity_Login extends AppCompatActivity {
                 if(isEmpty()){
                     String email = editEmail.getText().toString();
                     String password = editPassword.getText().toString();
-                    autentication.SignIn(Activity_Login.this,getSupportFragmentManager(),email,password);
+
+                    IniciarSesion(email,password);
                 }
             }
         });
@@ -75,4 +83,30 @@ public class Activity_Login extends AppCompatActivity {
                 !editPassword.getText().toString().equals("");
     }
 
+
+
+    @Override
+    public void onSuccess(String userId) {
+        Intent i = new Intent(Activity_Login.this, Activity_main.class);
+        i.putExtra("User",userId);
+        startActivity(i);
+    }
+
+    @Override
+    public void onFailure(Exception e) {
+        conta++;
+        if(conta == 10){
+            conta = 0;
+            ChooseDialog dialog = new ChooseDialog(Activity_Login.this,"","Desea Registrarse?");
+            dialog.show(getSupportFragmentManager(),null);
+        }else {
+            AlertDialogs dialogs = new AlertDialogs("Error", "El email o la contraseña son Incorrectas");
+            dialogs.show(getSupportFragmentManager(), "TAG");
+        }
+    }
+
+    @Override
+    public void IniciarSesion(String email, String password) {
+        presenter.IniciarSesion(email,password);
+    }
 }
