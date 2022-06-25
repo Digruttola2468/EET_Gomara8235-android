@@ -9,6 +9,7 @@ import com.gomara.Prosecer.Materias;
 import com.gomara.adapter.RecyclerAdapterMaterias;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,6 +46,21 @@ public class MateriasServerImpl implements MateriasServer{
                             Log.w("","Error getting documents." , task.getException());
                     }
                 });
+    }
+
+    @Override
+    public void getAnioCurso(String uid) {
+
+        db.collection("User").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    String anio = task.getResult().get("anio").toString();
+                    String curso = task.getResult().get("curso").toString();
+                    materiasPresenter.showAnioCurso(anio,curso);
+                }
+            }
+        });
     }
 
 }
