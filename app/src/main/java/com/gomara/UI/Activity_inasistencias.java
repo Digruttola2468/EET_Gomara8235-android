@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
+import com.gomara.Presenter.InasistenciasPresenter;
+import com.gomara.Presenter.InasistenciasPresenterImpl;
 import com.gomara.Prosecer.Alumno;
 import com.gomara.Prosecer.Horarios;
 import com.gomara.Server.ServerFireBase;
@@ -30,10 +32,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Activity_inasistencias extends Activity {
+public class Activity_inasistencias extends Activity implements InasistenciasView{
 
     private RecyclerView recyclerView;
     private ServerFireBase serverFireBase = new ServerFireBase();
+
+    private ProgressDialog progressDialog;
+
+    private InasistenciasPresenter inasistenciasPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,25 +52,38 @@ public class Activity_inasistencias extends Activity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        ProgressDialog progressDialog = new ProgressDialog(Activity_inasistencias.this);
+        inasistenciasPresenter = new InasistenciasPresenterImpl(this);
+
+        progressDialog = new ProgressDialog(Activity_inasistencias.this);
         progressDialog.create();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.show();
 
-        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
-                    String anio = task.getResult().get("anio").toString();
-                    String curso = task.getResult().get("curso").toString();
-
-                    serverFireBase.leerInasistencias(recyclerView,anio,curso );
-                }
-            }
-        });
+        getAnioCurso(auth.getUid().toString());
 
     }
 
+    @Override
+    public void showInasistencias(ArrayList<Alumno> allAlumnos) {
+        progressDialog.dismiss();
+
+        RecyclerAdapter adapter = new RecyclerAdapter(allAlumnos);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void getInasistencias(String anio, String curso) {
+        inasistenciasPresenter.getInasistencias(anio,curso);
+    }
+
+    @Override
+    public void showAnioCurso(String anio, String curso) {
+        getInasistencias(anio,curso);
+    }
+
+    @Override
+    public void getAnioCurso(String uid) {
+        inasistenciasPresenter.getAnioCurso(uid);
+    }
 }
