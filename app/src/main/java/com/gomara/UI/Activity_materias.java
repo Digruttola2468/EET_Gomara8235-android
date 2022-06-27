@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
 
     private MateriasPresenter presenter = null;
     private ProgressDialog progressDialog;
+    private TextView txtTotalMaterias;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
 
         btVolver = findViewById(R.id.btVolver_materias);
         recyclerView = findViewById(R.id.recyclerView_materias);
+        txtTotalMaterias = findViewById(R.id.txtTotalMaterias_materias);
 
         presenter = new MateriasPresenterImpl(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +65,8 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
         progressDialog.dismiss();
         RecyclerAdapterMaterias adapter = new RecyclerAdapterMaterias(allMaterias);
         recyclerView.setAdapter(adapter);
+
+        txtTotalMaterias.setText("Materias en Total: " + allMaterias.size());
     }
     @Override
     public void getMaterias(String anio, String curso) {
