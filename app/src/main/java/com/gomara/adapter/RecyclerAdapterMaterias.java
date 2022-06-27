@@ -34,6 +34,7 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setMateria(materias.get(position).getMateria());
         holder.setFechaEvaluacion(materias.get(position).getFechaPrueba());
+        holder.setTemasEvaluacion(materias.get(position).getTemasEvaluacion());
     }
 
     @Override
@@ -43,12 +44,13 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView materia,fechaEvaluacion;
+        private TextView materia,fechaEvaluacion,temasEvaluacion;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             materia = itemView.findViewById(R.id.txtMateria_materia);
             fechaEvaluacion = itemView.findViewById(R.id.txtFechaEvaluacion_materia);
+            temasEvaluacion = itemView.findViewById(R.id.txtTemasEvaluacion_materias_item);
         }
 
         void setMateria(String stringtitle){
@@ -56,6 +58,12 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
         }
         void setFechaEvaluacion(String fecha){
             fechaEvaluacion.setText("Evaluacion: " + fecha);
+        }
+        void setTemasEvaluacion(String temas){
+            if(temas == null)
+                temasEvaluacion.setVisibility(View.GONE);
+            else
+                temasEvaluacion.setText(temas);
         }
     }
 }

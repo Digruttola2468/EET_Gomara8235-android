@@ -29,5 +29,10 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Evaluacion: 14/05/2022"/>
+        <TextView
+            android:id="@+id/txtTemasEvaluacion_materias_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temas: "/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
