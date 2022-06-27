@@ -86,6 +86,8 @@ public class Activity_Registrarse extends AppCompatActivity implements Registrar
                     progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     progressDialog.show();
 
+                    btVolver.setEnabled(false);
+
                     createUser(email,password,nombre,apellido,anio,curso);
 
                 }else if(!isEquals())
@@ -150,7 +152,6 @@ public class Activity_Registrarse extends AppCompatActivity implements Registrar
     private boolean isEquals(){
         String stringNewPasswod = editNewPassword.getText().toString();
         String stringResetPassword = editResetPassword.getText().toString();
-        Log.d("TAG","NEW: " + stringNewPasswod + "  Reset: " + stringResetPassword);
         return stringNewPasswod.equals(stringResetPassword);
     }
 
@@ -168,12 +169,17 @@ public class Activity_Registrarse extends AppCompatActivity implements Registrar
         cleanEditTexts();
         AlertDialogs dialogs = new AlertDialogs("SignUp",mens);
         dialogs.show(getSupportFragmentManager(),null);
+
+        btVolver.setEnabled(true);
     }
 
     @Override
     public void onFailure(Exception e) {
+        progressDialog.dismiss();
         AlertDialogs dialogs = new AlertDialogs("Error",e.getMessage());
         dialogs.show(getSupportFragmentManager(),null);
+
+        btVolver.setEnabled(true);
     }
 
     @Override
