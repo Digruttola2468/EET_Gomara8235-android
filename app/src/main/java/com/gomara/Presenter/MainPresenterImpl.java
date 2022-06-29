@@ -20,7 +20,17 @@ public class MainPresenterImpl implements MainPresenter{
     }
 
     @Override
+    public void isAlumnado(Boolean isAlumado) {
+        mainView.isAlumnado(isAlumado);
+    }
+
+    @Override
     public void getUser(String uid) {
         server.getUser(uid);
+    }
+
+    @Override
+    public void getUserisAlumnado(String uid) {
+        server.getUserisAlumnado(uid);
     }
 }

@@ -46,6 +46,9 @@ public class Activity_main extends AppCompatActivity implements MainView{
 
     private MainPresenter presenter;
     private ProgressDialog progressDialog;
+
+    private ArrayList<ListaMain> lista = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +57,20 @@ public class Activity_main extends AppCompatActivity implements MainView{
         recyclerView = findViewById(R.id.recyclerView_main);
         txtMiPerfil = findViewById(R.id.txtMiPerfil_main);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        ArrayList<ListaMain> lista = new ArrayList<>();
+        presenter = new MainPresenterImpl(this);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        getUserisAlumnado(auth.getUid());
+
         lista.add(new ListaMain(R.drawable.image_inasistencias,"Inasistencias"));
         lista.add(new ListaMain(R.drawable.image_horarios,"Ver Horarios"));
         lista.add(new ListaMain(R.drawable.comunicado_image,"Comunidados"));
         lista.add(new ListaMain(R.drawable.materias,"Materias"));
-        //lista.add(new ListaMain(R.drawable.libreta,"Libretas"));
 
         RecyclerAdapterMain adapter = new RecyclerAdapterMain(lista);
         recyclerView.setAdapter(adapter);
 
-        presenter = new MainPresenterImpl(this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         txtMiPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +97,23 @@ public class Activity_main extends AppCompatActivity implements MainView{
     }
 
     @Override
+    public void isAlumnado(boolean isAlumnado) {
+        if(isAlumnado){
+            lista.add(new ListaMain(R.drawable.libreta,"Agregar Fecha Evaluacion"));
+            RecyclerAdapterMain adapter = new RecyclerAdapterMain(lista);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    @Override
     public void getUser(String uid) {
         presenter.getUser(uid);
     }
+
+    @Override
+    public void getUserisAlumnado(String uid) {
+        presenter.getUserisAlumnado(uid);
+    }
+
+
 }

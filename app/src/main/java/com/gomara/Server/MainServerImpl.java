@@ -31,17 +31,48 @@ public class MainServerImpl implements MainServer{
                     String apellido = task.getResult().getString("apellido");
                     String anio = task.getResult().getString("anio");
                     String curso = task.getResult().getString("curso");
+                    boolean isAlumnado = false;
 
-                    String mensaje =
-                            "Nombre: " + nombre + "\n" +
-                                    "Apellido: " + apellido + "\n" +
-                                    "Email: " + email + "\n" +
-                                    "Año: " + anio + " Curso: " + curso.toUpperCase();
+                    if(task.getResult().contains("alumnado"))
+                        isAlumnado = task.getResult().getBoolean("alumnado");
+
+                    String mensaje = "";
+                    if(isAlumnado) {
+                        mensaje = "Nombre: " + nombre + "\n" +
+                                "Apellido: " + apellido + "\n" +
+                                "Email: " + email + "\n" +
+                                "Alumnado: " + isAlumnado + "\n" +
+                                "Año: " + anio + " Curso: " + curso.toUpperCase();
+                    }
+                    else{
+                        mensaje = "Nombre: " + nombre + "\n" +
+                                "Apellido: " + apellido + "\n" +
+                                "Email: " + email + "\n" +
+                                "Año: " + anio + " Curso: " + curso.toUpperCase();
+                    }
 
                     presenter.showUser(mensaje);
 
                 }
             }
         });
+
     }
+
+    @Override
+    public void getUserisAlumnado(String uid) {
+        cloud.collection("User").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    boolean isAlumnado = false;
+                    if(task.getResult().contains("alumnado"))
+                        isAlumnado = task.getResult().getBoolean("alumnado");
+
+                    presenter.isAlumnado(isAlumnado);
+                }
+            }
+        });
+    }
+
 }
