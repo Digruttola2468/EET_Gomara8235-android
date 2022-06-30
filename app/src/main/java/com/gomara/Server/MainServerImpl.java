@@ -58,7 +58,7 @@ public class MainServerImpl implements MainServer{
         });
 
     }
-
+    /*
     @Override
     public void getUserisAlumnado(String uid) {
         cloud.collection("User").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -69,10 +69,10 @@ public class MainServerImpl implements MainServer{
                     if(task.getResult().contains("alumnado"))
                         isAlumnado = task.getResult().getBoolean("alumnado");
 
-                    presenter.isAlumnado(isAlumnado);
+                    //presenter.isAlumnado(isAlumnado);
                 }
             }
         });
-    }
+    }*/
 
 }
