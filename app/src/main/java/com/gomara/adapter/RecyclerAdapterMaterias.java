@@ -58,7 +58,7 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
         }
         void setFechaEvaluacion(String fecha){
             if(fecha == null)
-                fechaEvaluacion.setText("Evaluacion: ");
+                fechaEvaluacion.setVisibility(View.GONE);
             else
                 fechaEvaluacion.setText("Evaluacion: " + fecha);
         }
@@ -66,7 +66,7 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
             if(temas == null)
                 temasEvaluacion.setVisibility(View.GONE);
             else
-                temasEvaluacion.setText(temas);
+                temasEvaluacion.setText("Temas: " + temas);
         }
     }
 }

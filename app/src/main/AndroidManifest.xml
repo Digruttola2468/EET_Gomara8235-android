@@ -21,6 +21,14 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.gomara.Server.MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name="com.gomara.UI.View_horarios"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
