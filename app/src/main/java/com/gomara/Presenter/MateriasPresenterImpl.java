@@ -31,10 +31,20 @@ public class MateriasPresenterImpl implements MateriasPresenter{
         materiasServer.getMaterias(anio,curso);
     }
 
+    @Override
+    public void getIsDelegado(String uid) {
+        materiasServer.getIsDelegado(uid);
+    }
+
 
     @Override
     public void showAnioCurso(String anio, String curso) {
         materiasView.showAnioCurso(anio,curso);
+    }
+
+    @Override
+    public void showIsDelegado(boolean isDelegado) {
+        materiasView.showIsDelegado(isDelegado);
     }
 
     @Override

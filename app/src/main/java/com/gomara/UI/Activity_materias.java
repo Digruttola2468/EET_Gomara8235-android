@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,12 +26,12 @@ import java.util.ArrayList;
 public class Activity_materias extends AppCompatActivity implements MateriasView{
 
     private RecyclerView recyclerView;
-    private Button btVolver;
+    private Button btVolver,btFechaEvaluacion;
 
-    private MateriasPresenter presenter = null;
+    private MateriasPresenter presenter;
     private ProgressDialog progressDialog;
-    private TextView txtTotalMaterias;
 
+    private ArrayList<String> materias;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
 
         btVolver = findViewById(R.id.btVolver_materias);
         recyclerView = findViewById(R.id.recyclerView_materias);
-        txtTotalMaterias = findViewById(R.id.txtTotalMaterias_materias);
+        btFechaEvaluacion = findViewById(R.id.btFechaEvaluacion_materias);
 
         presenter = new MateriasPresenterImpl(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,13 +51,17 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
         progressDialog.show();
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        getAnioCurso(auth.getUid().toString());
+        getAnioCurso(auth.getUid());
 
-
+        btFechaEvaluacion.setVisibility(View.GONE);
 
         btVolver.setOnClickListener( (v) -> {
             Intent i = new Intent(Activity_materias.this, Activity_main.class);
             startActivity(i);
+        });
+        btFechaEvaluacion.setOnClickListener( (v) -> {
+            DialogFechaEvaluacion fechaEvaluacion = new DialogFechaEvaluacion(materias);
+            fechaEvaluacion.show(getSupportFragmentManager(),null);
         });
     }
 
@@ -66,22 +71,38 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
         RecyclerAdapterMaterias adapter = new RecyclerAdapterMaterias(allMaterias);
         recyclerView.setAdapter(adapter);
 
-        txtTotalMaterias.setText("Materias en Total: " + allMaterias.size());
+        materias = new ArrayList<>();
+        for (int i = 0; i < allMaterias.size(); i++) {
+            materias.add( allMaterias.get(i).getMateria() );
+        }
     }
     @Override
     public void getMaterias(String anio, String curso) {
         presenter.getMaterias(anio,curso);
     }
 
+    @Override
+    public void getIsDelegado(String uid) {
+        presenter.getIsDelegado(uid);
+    }
+
     //-----------------------------------------------------------
     @Override
     public void showAnioCurso(String anio, String curso) {
         getMaterias(anio,curso);
+
+    }
+
+    @Override
+    public void showIsDelegado(boolean isDelegado) {
+        if(isDelegado)
+            btFechaEvaluacion.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void getAnioCurso(String userId) {
         presenter.getAnioCurso(userId);
+        getIsDelegado(userId);
     }
 }

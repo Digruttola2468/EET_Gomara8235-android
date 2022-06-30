@@ -8,9 +8,11 @@ public interface MateriasView {
     //View
     void showMaterias(ArrayList<Materias> allMaterias);
     void showAnioCurso(String anio,String curso);
+    void showIsDelegado(boolean isDelegado);
 
     //-----------------------------------------------------
     // Presenter
-    void getMaterias(String anio,String curso);
     void getAnioCurso(String userId);
+    void getIsDelegado(String userId);
+    void getMaterias(String anio,String curso);
 }

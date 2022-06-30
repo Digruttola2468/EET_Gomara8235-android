@@ -6,6 +6,9 @@ public class Materias {
     private String fechaPrueba;
     private String temasEvaluacion;
 
+    public Materias(String materia){
+        this.materia = materia;
+    }
 
     public Materias(String materia,String fechaPrueba){
         this.materia = materia;

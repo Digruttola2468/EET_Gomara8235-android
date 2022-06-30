@@ -57,7 +57,10 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
             materia.setText(stringtitle);
         }
         void setFechaEvaluacion(String fecha){
-            fechaEvaluacion.setText("Evaluacion: " + fecha);
+            if(fecha == null)
+                fechaEvaluacion.setText("Evaluacion: ");
+            else
+                fechaEvaluacion.setText("Evaluacion: " + fecha);
         }
         void setTemasEvaluacion(String temas){
             if(temas == null)

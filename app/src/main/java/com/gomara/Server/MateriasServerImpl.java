@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 
@@ -39,8 +40,10 @@ public class MateriasServerImpl implements MateriasServer{
                             for(QueryDocumentSnapshot document : task.getResult()){
                                 if(document.contains("temas"))
                                     allMaterias.add(new Materias(document.getString("materia"),document.getString("evaluacion"), document.getString("temas") ));
-                                else
+                                else if(document.contains("evaluacion"))
                                     allMaterias.add(new Materias(document.getString("materia"),document.getString("evaluacion")));
+                                else
+                                    allMaterias.add(new Materias(document.getString("materia")));
                             }
 
                             materiasPresenter.showMaterias(allMaterias);
@@ -49,6 +52,22 @@ public class MateriasServerImpl implements MateriasServer{
                             Log.w("","Error getting documents." , task.getException());
                     }
                 });
+    }
+
+    @Override
+    public void getIsDelegado(String uid) {
+        db.collection("User").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    boolean isAlumnado = false;
+                    if(task.getResult().contains("delegado"))
+                        isAlumnado = task.getResult().getBoolean("delegado");
+
+                    materiasPresenter.showIsDelegado(isAlumnado);
+                }
+            }
+        });
     }
 
     @Override
