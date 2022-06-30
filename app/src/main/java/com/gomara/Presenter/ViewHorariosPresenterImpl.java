@@ -22,4 +22,14 @@ public class ViewHorariosPresenterImpl implements ViewHorariosPresenter{
     public void getAnioCurso(String uid) {
         server.getAnioCurso(uid);
     }
+
+    @Override
+    public void getSizeAllMaterias(String anio, String curso) {
+        server.getSizeAllMaterias(anio,curso);
+    }
+
+    @Override
+    public void showSizeAllMaterias(int size) {
+        view.showSizeAllMaterias(size);
+    }
 }

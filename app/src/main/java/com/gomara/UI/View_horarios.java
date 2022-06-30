@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -32,6 +35,7 @@ public class View_horarios extends Activity implements ViewHorariosView{
     private TouchImageView img;
     private Button btBack;
     private Spinner sp_anio,sp_curso;
+    private TextView txtMaterias;
 
     private ProgressDialog progressDialog;
     private ViewHorariosPresenter viewHorariosPresenter;
@@ -46,6 +50,7 @@ public class View_horarios extends Activity implements ViewHorariosView{
         btBack = findViewById(R.id.btBackViewHorarios);
         sp_anio = findViewById(R.id.spAnio_viewHorarios);
         sp_curso = findViewById(R.id.spCurso_viewHorarios);
+        txtMaterias = findViewById(R.id.txtMaterias_viewHorarios);
 
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,9 +109,9 @@ public class View_horarios extends Activity implements ViewHorariosView{
                 if(!anio.equals("-") && !curso.equals("-")){
                     Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
                     img.setImageResource(horarios.Image());
+
+                    getSizeAllMaterias(anio,curso);
                 }
-
-
 
             }
 
@@ -125,9 +130,7 @@ public class View_horarios extends Activity implements ViewHorariosView{
         progressDialog.show();
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        getAnioCurso(auth.getUid().toString());
-
-
+        getAnioCurso(auth.getUid());
 
     }
 
@@ -138,10 +141,23 @@ public class View_horarios extends Activity implements ViewHorariosView{
 
         Horarios horarios = new Horarios(anio,curso);  //mandamos los datos (anio,curso)
         img.setImageResource(horarios.Image());
+
+        getSizeAllMaterias(anio,curso);
     }
 
     @Override
     public void getAnioCurso(String uid) {
         viewHorariosPresenter.getAnioCurso(uid);
+    }
+
+    @Override
+    public void getSizeAllMaterias(String anio, String curso) {
+        viewHorariosPresenter.getSizeAllMaterias(anio,curso);
+    }
+
+    @Override
+    public void showSizeAllMaterias(int size) {
+        txtMaterias.setText("Materias: ");
+        Toast.makeText(this, "Materias: " + size, Toast.LENGTH_LONG).show();
     }
 }
