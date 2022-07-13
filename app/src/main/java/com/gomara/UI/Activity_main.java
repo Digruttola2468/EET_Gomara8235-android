@@ -17,7 +17,7 @@ import com.gomara.Presenter.MainPresenter;
 import com.gomara.Presenter.MainPresenterImpl;
 import com.gomara.Prosecer.ListaMain;
 import com.gomara.adapter.RecyclerAdapterMain;
-import com.gomara.dialog.ChooseDialogSignOut;
+import com.gomara.dialog.ChooseDialogUser;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
@@ -69,7 +69,7 @@ public class Activity_main extends AppCompatActivity implements MainView{
     @Override
     public void showUser(String mensaje) {
         progressDialog.dismiss();
-        ChooseDialogSignOut dialogs = new ChooseDialogSignOut(Activity_main.this,"My profile",mensaje);
+        ChooseDialogUser dialogs = new ChooseDialogUser(Activity_main.this,"My profile",mensaje);
         dialogs.show(getSupportFragmentManager(),null);
     }
 

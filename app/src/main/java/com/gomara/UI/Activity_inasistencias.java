@@ -37,7 +37,6 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         inasistenciasPresenter = new InasistenciasPresenterImpl(this);
 
@@ -47,7 +46,7 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.show();
 
-        getAnioCurso(auth.getUid().toString());
+        getAnioCurso(auth.getUid());
 
     }
 

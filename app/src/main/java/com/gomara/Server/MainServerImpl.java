@@ -3,9 +3,6 @@ package com.gomara.Server;
 import androidx.annotation.NonNull;
 
 import com.gomara.Presenter.MainPresenter;
-import com.gomara.Presenter.MainPresenterImpl;
-import com.gomara.UI.Activity_main;
-import com.gomara.dialog.ChooseDialogSignOut;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
