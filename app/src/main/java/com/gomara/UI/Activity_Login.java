@@ -84,6 +84,7 @@ public class Activity_Login extends AppCompatActivity implements ActivityLoginVi
         if(user != null){
             Intent intent = new Intent(Activity_Login.this,Activity_main.class);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -101,10 +102,12 @@ public class Activity_Login extends AppCompatActivity implements ActivityLoginVi
         Intent i = new Intent(Activity_Login.this, Activity_main.class);
         i.putExtra("User",userId);
         startActivity(i);
+        finish();
     }
 
     @Override
     public void onFailure(Exception e) {
+        progressDialog.dismiss();
         conta++;
         if(conta == 10){
             conta = 0;

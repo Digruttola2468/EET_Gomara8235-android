@@ -66,6 +66,7 @@ public class Activity_Registrarse extends AppCompatActivity implements Registrar
             public void onClick(View v) {
                 Intent i = new Intent(Activity_Registrarse.this,Activity_Login.class);
                 startActivity(i);
+                finish();
             }
         });
 

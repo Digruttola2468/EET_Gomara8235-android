@@ -61,6 +61,7 @@ public class Activity_comunicados extends AppCompatActivity implements Comunicad
             public void onClick(View view) {
                 Intent i = new Intent(Activity_comunicados.this,Activity_main.class);
                 startActivity(i);
+                finish();
             }
         });
 

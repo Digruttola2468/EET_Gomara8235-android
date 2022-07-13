@@ -67,6 +67,7 @@ public class Activity_materias extends AppCompatActivity implements MateriasView
         btVolver.setOnClickListener( (v) -> {
             Intent i = new Intent(Activity_materias.this, Activity_main.class);
             startActivity(i);
+            finish();
         });
         btFechaEvaluacion.setOnClickListener( (v) -> {
             DialogFechaEvaluacion fechaEvaluacion = new DialogFechaEvaluacion(Activity_materias.this,materias,anio,curso);

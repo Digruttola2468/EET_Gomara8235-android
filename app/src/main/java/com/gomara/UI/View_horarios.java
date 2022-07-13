@@ -57,6 +57,7 @@ public class View_horarios extends Activity implements ViewHorariosView{
             public void onClick(View v) {
                 Intent i = new Intent( View_horarios.this , Activity_main.class );
                 startActivity(i);
+                finish();
             }
         });
 
