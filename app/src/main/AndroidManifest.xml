@@ -44,6 +44,9 @@
         <activity android:name="com.gomara.UI.Activity_comunicados"/>
 
         <activity android:name="com.gomara.UI.Activity_materias"/>
+
+        <activity android:name="com.gomara.UI.Activity_settingUser"/>
+
     </application>
 
 </manifest>

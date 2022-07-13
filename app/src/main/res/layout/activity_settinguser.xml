@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtNombre_settingUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editNombre_settingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="50dp"
+        android:hint="New Nombre"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/txtApellido_settingUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editApellido_settingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="50dp"
+        android:hint="New Apellido"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/txtEmail_settingUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/editTextEmail_settingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="50dp"
+        android:hint="New Email"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btEditar_settingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"/>
+
+    <Button
+        android:id="@+id/btSignOut_settingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Cerrar Session" />
+
+</LinearLayout>
