@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.gomara.Presenter.ComunicadoPresenter;
 import com.gomara.Presenter.ComunicadoPresenterImp;
 import com.gomara.Prosecer.Comunicado;
 import com.gomara.adapter.RecyclerAdapterComunicados;
+import com.gomara.dialog.DialogComunicado;
+import com.gomara.dialog.DialogFechaEvaluacion;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,9 +33,13 @@ import java.util.ArrayList;
 public class Activity_comunicados extends AppCompatActivity implements ComunicadoView {
 
     private RecyclerView recyclerView;
-    private Button btVolver;
+    private Button btVolver,btAgregarComunicado;
 
     private ComunicadoPresenter couponPresenter = null;
+    private ProgressDialog progressDialog;
+
+    private String anio = "";
+    private String curso = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,41 +51,43 @@ public class Activity_comunicados extends AppCompatActivity implements Comunicad
 
         recyclerView = findViewById(R.id.recyclerView_comunicados);
         btVolver = findViewById(R.id.btVolver_comunicados);
+        btAgregarComunicado = findViewById(R.id.btAgregarComunicado_comunicados);
+
+        btAgregarComunicado.setVisibility(View.GONE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        ProgressDialog progressDialog = new ProgressDialog(Activity_comunicados.this);
+        progressDialog = new ProgressDialog(Activity_comunicados.this);
         progressDialog.create();
         progressDialog.setContentView(R.layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.show();
 
-        btVolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Activity_comunicados.this,Activity_main.class);
-                startActivity(i);
-                finish();
-            }
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        getUser(auth.getUid());
+
+        btVolver.setOnClickListener(view -> {
+            Intent i = new Intent(Activity_comunicados.this,Activity_main.class);
+            startActivity(i);
+            finish();
         });
 
-        db.collection("User").document(auth.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
-                    String anio = task.getResult().get("anio").toString();
-                    String curso = task.getResult().get("curso").toString();
-
-                    getComunicado(anio,curso);
-                }
+        btAgregarComunicado.setOnClickListener( view -> {
+            DialogComunicado fechaEvaluacion = new DialogComunicado(anio,curso,Activity_comunicados.this);
+            fechaEvaluacion.show(getSupportFragmentManager(),null);
+            
+            if(fechaEvaluacion.isAdded()){
+                Toast.makeText(Activity_comunicados.this, "Agregaste Algo", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
 
+    @Override
+    public void showUser(String anio, String curso) {
+        this.anio  = anio;
+        this.curso = curso;
+        getComunicado(anio,curso);
     }
 
     //Controler
@@ -86,7 +95,18 @@ public class Activity_comunicados extends AppCompatActivity implements Comunicad
     public void showComunicado(ArrayList<Comunicado> coupon) {
         RecyclerAdapterComunicados adapter = new RecyclerAdapterComunicados(coupon);
         recyclerView.setAdapter(adapter);
+        progressDialog.dismiss();
+    }
 
+    @Override
+    public void isPreseptor(boolean isPreseptor) {
+        if(isPreseptor)
+            btAgregarComunicado.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void getUser(String uid) {
+        couponPresenter.getUser(uid);
     }
 
     @Override

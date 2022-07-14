@@ -1,6 +1,6 @@
 package com.gomara.Server;
 
-public interface ComunicadoInteractor {
+public interface ComunicadoServer {
     void getCouponsFirebase(String anio,String curso);
-    void getCouponsAuth();
+    void getUser(String uid);
 }
