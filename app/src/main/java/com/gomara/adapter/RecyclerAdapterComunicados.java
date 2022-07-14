@@ -33,6 +33,7 @@ public class RecyclerAdapterComunicados extends RecyclerView.Adapter<RecyclerAda
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setTitle(comunicados.get(position).getTitle());
         holder.setContenido(comunicados.get(position).getContendio());
+        holder.setFechaEnvio(comunicados.get(position).getFechaEnvio());
     }
 
     @Override
@@ -44,11 +45,13 @@ public class RecyclerAdapterComunicados extends RecyclerView.Adapter<RecyclerAda
 
         private TextView title;
         private TextView contenido;
+        private TextView fechaEnvio;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.txtTitle_item_comunicado);
             contenido = itemView.findViewById(R.id.txtContenido_item_comunicado);
+            fechaEnvio = itemView.findViewById(R.id.txtFechaEnvio_item_comunicado);
         }
 
         void setTitle(String stringtitle){
@@ -57,6 +60,6 @@ public class RecyclerAdapterComunicados extends RecyclerView.Adapter<RecyclerAda
         void setContenido(String stringContenido){
             contenido.setText(stringContenido);
         }
-
+        void setFechaEnvio(String fecha){fechaEnvio.setText(fecha);}
     }
 }
