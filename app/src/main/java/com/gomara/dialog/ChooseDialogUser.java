@@ -10,15 +10,16 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 
 import com.gomara.UI.Activity_Login;
+import com.gomara.UI.Activity_settingUser;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ChooseDialogSignOut extends DialogFragment {
+public class ChooseDialogUser extends DialogFragment {
 
     private String title;
     private String mensaje;
     private Context context;
 
-    public ChooseDialogSignOut(Context context,String title, String mensaje) {
+    public ChooseDialogUser(Context context,String title, String mensaje) {
         this.title = title;
         this.mensaje = mensaje;
         this.context = context;
@@ -30,13 +31,11 @@ public class ChooseDialogSignOut extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         builder.setMessage(mensaje);
-        builder.setPositiveButton("Cerrar Sesion", new DialogInterface.OnClickListener() {
+
+        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                auth.signOut();
-
-                Intent intent = new Intent(context, Activity_Login.class);
+                Intent intent = new Intent(context, Activity_settingUser.class);
                 startActivity(intent);
             }
         });

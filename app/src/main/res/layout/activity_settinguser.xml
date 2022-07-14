@@ -21,6 +21,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="50dp"
         android:hint="New Nombre"
+        android:inputType="textPersonName"
         android:minHeight="48dp" />
 
     <TextView
@@ -38,6 +39,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="50dp"
         android:hint="New Apellido"
+        android:inputType="textPersonName"
         android:minHeight="48dp" />
 
     <TextView
@@ -56,6 +58,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="50dp"
         android:hint="New Email"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp" />
 
     <Button
