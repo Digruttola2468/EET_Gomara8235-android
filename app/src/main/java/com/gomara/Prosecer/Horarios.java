@@ -16,57 +16,57 @@ public class Horarios {
             return "";
         }
 
-        public int Image() {
+        public String Image() {
 
             if (anio.equals("1")) {
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_1a;
+                        return "Horarios/horario_1a.png";
                     case "b":
-                        return R.drawable.horario_1b;
+                        return "Horarios/horario_1b.png";
                     case "c":
-                        return R.drawable.horario_1c;
+                        return "Horarios/horario_1c.png";
                     case "d":
-                        return R.drawable.horario_1d;
+                        return "Horarios/horario_1d.png";
                 }
             }
 
             if (anio.equals("2")) {
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_2a;
+                        return "Horarios/horario_2a.png";
                     case "b":
-                        return R.drawable.horario_2b;
+                        return "Horarios/horario_2b.png";
                     case "c":
-                        return R.drawable.horario_2c;
+                        return "Horarios/horario_2c.png";
                     case "d":
-                        return R.drawable.horario_2d;
+                        return "Horarios/horario_2d.png";
                 }
             }
 
             if (anio.equals("3")) {
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_3a;
+                        return "Horarios/horario_3a.png";
                     case "b":
-                        return R.drawable.horario_3b;
+                        return "Horarios/horario_3b.png";
                     case "c":
-                        return R.drawable.horario_3c;
+                        return "Horarios/horario_3c.png";
                     case "d":
-                        return R.drawable.horario_3d;
+                        return "Horarios/horario_3d.png";
                 }
             }
 
             if (anio.equals("4")) {
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_4a;
+                        return "Horarios/horario_4a.png";
                     case "b":
-                        return R.drawable.horario_4b;
+                        return "Horarios/horario_4b.png";
                     case "c":
-                        return R.drawable.horario_4c;
+                        return "Horarios/horario_4c.png";
                     case "d":
-                        return 1;
+                        return "";
                 }
             }
 
@@ -74,13 +74,13 @@ public class Horarios {
 
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_5a;
+                        return "Horarios/horario_5a.png";
                     case "b":
-                        return R.drawable.horario_5b;
+                        return "Horarios/horario_5b.png";
                     case "c":
-                        return R.drawable.horario_5c;
+                        return "Horarios/horario_5c.png";
                     case "d":
-                        return 1;
+                        return "";
                 }
 
             }
@@ -89,11 +89,11 @@ public class Horarios {
 
                 switch (curso) {
                     case "a":
-                        return R.drawable.horario_6a;
+                        return "Horarios/horario_6a.png";
                 }
 
             }
-            return 1;
+            return "";
         }
 
     }

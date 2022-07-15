@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gomara">
 
-    <permission android:name="android.permission.INTERNET"/>
-    <permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <permission android:name="android.permission.INTERNET" />
+    <permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,8 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
+        <activity
+            android:name="com.gomara.UI.ActivityGestionInasistencias"
+            android:exported="false" />
         <!-- Splash Screen -->
-        <activity android:name="com.gomara.UI.SplashScreen"
+        <activity
+            android:name="com.gomara.UI.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,28 +33,20 @@
             android:name="com.gomara.Server.MyFirebaseInstanceIDService"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
         <activity
             android:name="com.gomara.UI.View_horarios"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity android:name="com.gomara.UI.Activity_inasistencias" />
-
         <activity android:name="com.gomara.UI.Activity_main" />
-
         <activity android:name="com.gomara.UI.Activity_Login" />
-
         <activity android:name="com.gomara.UI.Activity_Registrarse" />
-
-        <activity android:name="com.gomara.UI.Activity_comunicados"/>
-
-        <activity android:name="com.gomara.UI.Activity_materias"/>
-
-        <activity android:name="com.gomara.UI.Activity_settingUser"/>
-
+        <activity android:name="com.gomara.UI.Activity_comunicados" />
+        <activity android:name="com.gomara.UI.Activity_materias" />
+        <activity android:name="com.gomara.UI.Activity_settingUser" />
     </application>
 
 </manifest>
