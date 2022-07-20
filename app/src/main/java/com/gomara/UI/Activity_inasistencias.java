@@ -2,9 +2,11 @@ package com.gomara.UI;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,9 +25,9 @@ import java.util.ArrayList;
 public class Activity_inasistencias extends Activity implements InasistenciasView{
 
     private RecyclerView recyclerView;
+    private Button btVolver,btGestionInasistenicas;
 
     private ProgressDialog progressDialog;
-
     private InasistenciasPresenter inasistenciasPresenter;
 
     @Override
@@ -34,6 +36,9 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
         setContentView(R.layout.activity_inasistencias);
 
         recyclerView = findViewById(R.id.recycler_datos);
+        btVolver = findViewById(R.id.btVolver_inasistencias);
+        btGestionInasistenicas = findViewById(R.id.btGestionInasistenicas_inasistencias);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -48,6 +53,17 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
 
         getAnioCurso(auth.getUid());
 
+
+        btVolver.setOnClickListener( view -> {
+            Intent i = new Intent(Activity_inasistencias.this,Activity_main.class);
+            startActivity(i);
+            finish();
+        } );
+
+        btGestionInasistenicas.setOnClickListener( view -> {
+            Intent i = new Intent(Activity_inasistencias.this,ActivityGestionInasistencias.class);
+            startActivity(i);
+        } );
     }
 
     @Override
@@ -72,4 +88,5 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
     public void getAnioCurso(String uid) {
         inasistenciasPresenter.getAnioCurso(uid);
     }
+
 }

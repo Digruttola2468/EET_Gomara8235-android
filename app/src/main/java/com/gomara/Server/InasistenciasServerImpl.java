@@ -37,7 +37,7 @@ public class InasistenciasServerImpl implements InasistenciasServer{
                             ArrayList<Alumno> allAlumnos = new ArrayList<>();
 
                             for(QueryDocumentSnapshot document : task.getResult()){
-                                allAlumnos.add(new Alumno(document.get("Nombre").toString(),Float.parseFloat(document.get("Inasistencias").toString())));
+                                allAlumnos.add(new Alumno(document.getId(),document.get("Nombre").toString(),Float.parseFloat(document.get("Inasistencias").toString())));
                             }
 
                             presenter.showInasistencias(allAlumnos);
