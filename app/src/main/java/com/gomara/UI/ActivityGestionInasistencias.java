@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gomara.R;
+import com.gomara.Presenter.GestionInasistenciasImpl;
+import com.gomara.Presenter.GestionInasistenciasPresenter;
 import com.gomara.Prosecer.Alumno;
 import com.gomara.adapter.RecyclerAdapterGestionInasistencias;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class ActivityGestionInasistencias extends AppCompatActivity {
+public class ActivityGestionInasistencias extends AppCompatActivity implements GestionInasistenciasView{
 
     private RecyclerView recyclerView;
     private Button btVolver,btGuardar;
@@ -38,8 +40,11 @@ public class ActivityGestionInasistencias extends AppCompatActivity {
     * Actualizar en las bases de datos
     * */
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private RecyclerAdapterGestionInasistencias gestion;
+    private String anio,curso;
+    private GestionInasistenciasPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,39 +55,12 @@ public class ActivityGestionInasistencias extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_gestionInasistencias);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(null));
+        presenter = new GestionInasistenciasImpl(this);
 
-        db.collection("Cursos/5a/Alumnos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                ArrayList<Alumno> alumn = new ArrayList<>();
-
-                for(DocumentSnapshot documentSnapshot : task.getResult()){
-                    alumn.add(new Alumno(documentSnapshot.getId(),documentSnapshot.getString("Apellido"),documentSnapshot.getDouble("Inasistencias")));
-                }
-
-                gestion = new RecyclerAdapterGestionInasistencias(alumn);
-                recyclerView.setAdapter(gestion);
-            }
-        });
-
+        getAnioCurso();
 
         btGuardar.setOnClickListener( view -> {
-            ArrayList<Alumno> alumList = gestion.getAlumno();
-            for (int i = 0; i < alumList.size(); i++) {
-
-                db.collection("Cursos/5a/Alumnos").document(alumList.get(i).getId()).update("Inasistencias",alumList.get(i).getInasistencias()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(ActivityGestionInasistencias.this, "Se Actualizo", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-            }
-            Intent i = new Intent(ActivityGestionInasistencias.this,Activity_inasistencias.class);
-            startActivity(i);
-            finish();
+            updateAlumnos(anio,curso,gestion.getAlumno());
         });
 
         btVolver.setOnClickListener( view -> {
@@ -91,5 +69,48 @@ public class ActivityGestionInasistencias extends AppCompatActivity {
             finish();
         });
 
+    }
+
+    @Override
+    public void getAnioCurso() {
+        presenter.getAnioCurso();
+    }
+
+    @Override
+    public void getListAlumno(String anio, String curso) {
+        presenter.getListAlumno(anio,curso);
+    }
+
+    @Override
+    public void updateAlumnos(String anio,String curso,ArrayList<Alumno> alumnos) {
+        presenter.updateAlumnos(anio,curso,alumnos);
+    }
+
+    @Override
+    public void showAnioCurso(String anio, String curso) {
+        this.anio = anio;
+        this.curso = curso;
+
+        getListAlumno(anio,curso);
+    }
+
+    @Override
+    public void showListAlumno(ArrayList<Alumno> alumnos) {
+        gestion = new RecyclerAdapterGestionInasistencias(alumnos);
+        recyclerView.setAdapter(gestion);
+    }
+
+    @Override
+    public void onSuccessUpdate(String mens) {
+        Toast.makeText(this, mens, Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(ActivityGestionInasistencias.this,Activity_inasistencias.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void onFailueUpdate(String e) {
+        Log.w("ERROR UPDATE",e);
     }
 }
