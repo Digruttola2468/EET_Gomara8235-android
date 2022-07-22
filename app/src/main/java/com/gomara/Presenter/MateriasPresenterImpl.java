@@ -3,7 +3,7 @@ package com.gomara.Presenter;
 import com.gomara.Prosecer.Materias;
 import com.gomara.Server.MateriasServer;
 import com.gomara.Server.MateriasServerImpl;
-import com.gomara.UI.MateriasView;
+import com.gomara.ui.MateriasView;
 
 import java.util.ArrayList;
 

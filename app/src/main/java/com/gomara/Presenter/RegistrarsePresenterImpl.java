@@ -2,7 +2,7 @@ package com.gomara.Presenter;
 
 import com.gomara.Server.RegistrarseServer;
 import com.gomara.Server.RegistrarseServerImpl;
-import com.gomara.UI.RegistrarseView;
+import com.gomara.ui.RegistrarseView;
 
 public class RegistrarsePresenterImpl implements RegistrarsePresenter{
 

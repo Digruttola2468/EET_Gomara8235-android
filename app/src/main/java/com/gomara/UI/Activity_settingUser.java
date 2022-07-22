@@ -1,4 +1,4 @@
-package com.gomara.UI;
+package com.gomara.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.gomara.UI;
+package com.gomara.ui;
 
 public interface ActivitySettingUserView {
     void getUpdateUser(String nombre,String apellido,String email);

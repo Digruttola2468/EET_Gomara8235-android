@@ -1,14 +1,9 @@
 package com.gomara.Server;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
-import com.gomara.Presenter.GestionInasistenciasImpl;
 import com.gomara.Presenter.GestionInasistenciasPresenter;
 import com.gomara.Prosecer.Alumno;
-import com.gomara.UI.ActivityGestionInasistencias;
-import com.gomara.adapter.RecyclerAdapterGestionInasistencias;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

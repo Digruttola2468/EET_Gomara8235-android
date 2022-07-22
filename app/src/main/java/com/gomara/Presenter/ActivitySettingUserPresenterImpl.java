@@ -2,8 +2,8 @@ package com.gomara.Presenter;
 
 import com.gomara.Server.SettingUserServer;
 import com.gomara.Server.SettingUserServerImpl;
-import com.gomara.UI.ActivitySettingUserView;
-import com.gomara.UI.Activity_settingUser;
+import com.gomara.ui.ActivitySettingUserView;
+import com.gomara.ui.Activity_settingUser;
 
 public class ActivitySettingUserPresenterImpl implements ActivitySettingUserPresenter{
 

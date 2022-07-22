@@ -2,7 +2,7 @@ package com.gomara.Presenter;
 
 import com.gomara.Server.LoginServer;
 import com.gomara.Server.LoginServerImpl;
-import com.gomara.UI.ActivityLoginView;
+import com.gomara.ui.ActivityLoginView;
 
 public class ActivityLoginPresenterImpl implements ActivityLoginPresenter{
 

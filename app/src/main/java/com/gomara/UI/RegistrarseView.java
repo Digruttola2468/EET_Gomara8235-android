@@ -1,6 +1,5 @@
-package com.gomara.UI;
+package com.gomara.ui;
 
-import java.util.Map;
 
 public interface RegistrarseView {
     //View

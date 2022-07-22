@@ -1,12 +1,8 @@
 package com.gomara.Server;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 
 import com.gomara.Presenter.ActivityLoginPresenter;
-import com.gomara.UI.Activity_Login;
-import com.gomara.UI.Activity_main;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

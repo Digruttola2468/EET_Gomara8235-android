@@ -1,4 +1,4 @@
-package com.gomara.UI;
+package com.gomara.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

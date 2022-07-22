@@ -4,7 +4,7 @@ import android.net.Uri;
 
 import com.gomara.Server.ViewHorariosServer;
 import com.gomara.Server.ViewHorariosServerImpl;
-import com.gomara.UI.ViewHorariosView;
+import com.gomara.ui.ViewHorariosView;
 
 public class ViewHorariosPresenterImpl implements ViewHorariosPresenter{
 

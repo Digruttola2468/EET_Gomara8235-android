@@ -9,9 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.gomara.UI.Activity_Login;
-import com.gomara.UI.Activity_settingUser;
-import com.google.firebase.auth.FirebaseAuth;
+import com.gomara.ui.Activity_settingUser;
 
 public class ChooseDialogUser extends DialogFragment {
 

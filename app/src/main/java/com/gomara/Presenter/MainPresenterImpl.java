@@ -2,8 +2,8 @@ package com.gomara.Presenter;
 
 import com.gomara.Server.MainServer;
 import com.gomara.Server.MainServerImpl;
-import com.gomara.UI.Activity_main;
-import com.gomara.UI.MainView;
+import com.gomara.ui.Activity_main;
+import com.gomara.ui.MainView;
 
 public class MainPresenterImpl implements MainPresenter{
 

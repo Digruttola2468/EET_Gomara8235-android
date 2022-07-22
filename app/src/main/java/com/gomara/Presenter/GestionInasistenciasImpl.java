@@ -3,7 +3,7 @@ package com.gomara.Presenter;
 import com.gomara.Prosecer.Alumno;
 import com.gomara.Server.GestionInasistenciasServer;
 import com.gomara.Server.GestionInasistenciasServerImpl;
-import com.gomara.UI.GestionInasistenciasView;
+import com.gomara.ui.GestionInasistenciasView;
 
 import java.util.ArrayList;
 

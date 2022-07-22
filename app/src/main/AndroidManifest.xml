@@ -16,11 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
-            android:name="com.gomara.UI.ActivityGestionInasistencias"
+            android:name="com.gomara.ui.ActivityGestionInasistencias"
             android:exported="false" />
         <!-- Splash Screen -->
         <activity
-            android:name="com.gomara.UI.SplashScreen"
+            android:name="com.gomara.ui.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,15 +38,15 @@
         </service>
 
         <activity
-            android:name="com.gomara.UI.View_horarios"
+            android:name="com.gomara.ui.View_horarios"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name="com.gomara.UI.Activity_inasistencias" />
-        <activity android:name="com.gomara.UI.Activity_main" />
-        <activity android:name="com.gomara.UI.Activity_Login" />
-        <activity android:name="com.gomara.UI.Activity_Registrarse" />
-        <activity android:name="com.gomara.UI.Activity_comunicados" />
-        <activity android:name="com.gomara.UI.Activity_materias" />
-        <activity android:name="com.gomara.UI.Activity_settingUser" />
+        <activity android:name="com.gomara.ui.Activity_inasistencias" />
+        <activity android:name="com.gomara.ui.Activity_main" />
+        <activity android:name="com.gomara.ui.Activity_Login" />
+        <activity android:name="com.gomara.ui.Activity_Registrarse" />
+        <activity android:name="com.gomara.ui.Activity_comunicados" />
+        <activity android:name="com.gomara.ui.Activity_materias" />
+        <activity android:name="com.gomara.ui.Activity_settingUser" />
     </application>
 
 </manifest>

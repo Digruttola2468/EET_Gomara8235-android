@@ -3,7 +3,7 @@ package com.gomara.Presenter;
 import com.gomara.Prosecer.Comunicado;
 import com.gomara.Server.ComunicadoServer;
 import com.gomara.Server.ComunicadoServerImpl;
-import com.gomara.UI.ComunicadoView;
+import com.gomara.ui.ComunicadoView;
 
 import java.util.ArrayList;
 

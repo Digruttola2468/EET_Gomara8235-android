@@ -3,8 +3,8 @@ package com.gomara.Presenter;
 import com.gomara.Prosecer.Alumno;
 import com.gomara.Server.InasistenciasServer;
 import com.gomara.Server.InasistenciasServerImpl;
-import com.gomara.UI.Activity_inasistencias;
-import com.gomara.UI.InasistenciasView;
+import com.gomara.ui.Activity_inasistencias;
+import com.gomara.ui.InasistenciasView;
 
 import java.util.ArrayList;
 

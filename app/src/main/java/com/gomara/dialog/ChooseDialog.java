@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.gomara.UI.Activity_Registrarse;
+import com.gomara.ui.Activity_Registrarse;
 
 public class ChooseDialog extends DialogFragment {
 

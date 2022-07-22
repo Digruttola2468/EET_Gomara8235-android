@@ -1,4 +1,4 @@
-package com.gomara.UI;
+package com.gomara.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

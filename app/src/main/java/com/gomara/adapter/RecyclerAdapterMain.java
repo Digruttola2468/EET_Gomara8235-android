@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gomara.R;
 import com.gomara.Prosecer.ListaMain;
-import com.gomara.UI.Activity_comunicados;
-import com.gomara.UI.Activity_inasistencias;
-import com.gomara.UI.Activity_materias;
-import com.gomara.UI.View_horarios;
+import com.gomara.ui.Activity_comunicados;
+import com.gomara.ui.Activity_inasistencias;
+import com.gomara.ui.Activity_materias;
+import com.gomara.ui.View_horarios;
 
 import java.util.ArrayList;
 
