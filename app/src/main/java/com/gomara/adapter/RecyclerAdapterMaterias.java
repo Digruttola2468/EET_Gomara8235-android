@@ -57,13 +57,13 @@ public class RecyclerAdapterMaterias extends RecyclerView.Adapter<RecyclerAdapte
             materia.setText(stringtitle);
         }
         void setFechaEvaluacion(String fecha){
-            if(fecha == null)
+            if(fecha == null || fecha.equals(""))
                 fechaEvaluacion.setVisibility(View.GONE);
             else
                 fechaEvaluacion.setText("Evaluacion: " + fecha);
         }
         void setTemasEvaluacion(String temas){
-            if(temas == null)
+            if(temas == null || temas.equals(""))
                 temasEvaluacion.setVisibility(View.GONE);
             else
                 temasEvaluacion.setText("Temas: " + temas);
