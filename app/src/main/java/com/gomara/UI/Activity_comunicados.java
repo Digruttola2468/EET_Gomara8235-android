@@ -96,6 +96,10 @@ public class Activity_comunicados extends AppCompatActivity implements Comunicad
         RecyclerAdapterComunicados adapter = new RecyclerAdapterComunicados(coupon);
         recyclerView.setAdapter(adapter);
         progressDialog.dismiss();
+
+        if(coupon.isEmpty()){
+            Toast.makeText(this, "Vacio", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

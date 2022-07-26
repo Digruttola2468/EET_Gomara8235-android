@@ -19,12 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Activity_settingUser extends AppCompatActivity implements ActivitySettingUserView{
 
     private TextView txtNombre,txtApellido,txtEmail;
-    private EditText editNombre,editApellido,editEmail;
+    private EditText editNombre,editApellido;
     private Button btGuardar,btSignOut;
 
     private String nombreActual;
     private String apellidoActual;
-    private String emailActual;
 
     private ActivitySettingUserPresenter presenter;
     @Override
@@ -37,7 +36,6 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
         txtEmail = findViewById(R.id.txtEmail_settingUser);
         editNombre = findViewById(R.id.editNombre_settingUser);
         editApellido = findViewById(R.id.editApellido_settingUser);
-        editEmail = findViewById(R.id.editTextEmail_settingUser);
         btGuardar = findViewById(R.id.btEditar_settingUser);
         btSignOut = findViewById(R.id.btSignOut_settingUser);
 
@@ -51,9 +49,8 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
 
                 String nombre = editNombre.getText().toString();
                 String apellido = editApellido.getText().toString();
-                String email = editEmail.getText().toString();
 
-                if(nombre.equals("") && apellido.equals("") && email.equals("")){
+                if(nombre.equals("") && apellido.equals("")){
                     Toast.makeText(Activity_settingUser.this, "Campos Vacios", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -64,11 +61,9 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
                 if (apellido.equals(""))
                     apellido = apellidoActual;
 
-                if(email.equals(""))
-                    email = emailActual;
 
 
-                getUpdateUser(nombre,apellido,email);
+                getUpdateUser(nombre,apellido);
             }
         });
 
@@ -79,6 +74,7 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
                 auth.signOut();
                 Intent i = new Intent(Activity_settingUser.this,Activity_Login.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -87,12 +83,11 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
     private void vaciarCampos(){
         editNombre.setText("");
         editApellido.setText("");
-        editEmail.setText("");
     }
 
     @Override
-    public void getUpdateUser(String nombre, String apellido,String email) {
-        presenter.getUpdateUser(nombre, apellido,email);
+    public void getUpdateUser(String nombre, String apellido) {
+        presenter.getUpdateUser(nombre, apellido);
     }
 
     @Override
@@ -104,11 +99,10 @@ public class Activity_settingUser extends AppCompatActivity implements ActivityS
     public void onSuccessGetUserActual(String nombre, String apellido,String email) {
         nombreActual = nombre;
         apellidoActual = apellido;
-        emailActual = email;
 
         txtNombre.setText("Nombre Actual: " + nombre);
         txtApellido.setText( "Apellido Actual: " + apellido);
-        txtEmail.setText("Email Actual: " + email);
+        txtEmail.setText("Email: " + email);
     }
 
     @Override

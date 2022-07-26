@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -39,6 +40,8 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
         btVolver = findViewById(R.id.btVolver_inasistencias);
         btGestionInasistenicas = findViewById(R.id.btGestionInasistenicas_inasistencias);
 
+        btGestionInasistenicas.setVisibility(View.GONE);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -63,6 +66,7 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
         btGestionInasistenicas.setOnClickListener( view -> {
             Intent i = new Intent(Activity_inasistencias.this,ActivityGestionInasistencias.class);
             startActivity(i);
+
         } );
     }
 
@@ -80,6 +84,11 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
     }
 
     @Override
+    public void isPreseptor(boolean isPreseptor) {
+        if(isPreseptor) btGestionInasistenicas.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showAnioCurso(String anio, String curso) {
         getInasistencias(anio,curso);
     }
@@ -88,5 +97,6 @@ public class Activity_inasistencias extends Activity implements InasistenciasVie
     public void getAnioCurso(String uid) {
         inasistenciasPresenter.getAnioCurso(uid);
     }
+
 
 }
