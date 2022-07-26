@@ -15,8 +15,8 @@ public class ActivitySettingUserPresenterImpl implements ActivitySettingUserPres
     }
 
     @Override
-    public void getUpdateUser(String nombre, String apellido, String email) {
-        server.getUpdateUser(nombre, apellido, email);
+    public void getUpdateUser(String nombre, String apellido) {
+        server.getUpdateUser(nombre, apellido);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class ActivitySettingUserPresenterImpl implements ActivitySettingUserPres
     }
 
     @Override
-    public void onSuccessGetUserActual(String nombre, String apellido, String email) {
-        view.onSuccessGetUserActual(nombre, apellido, email);
+    public void onSuccessGetUserActual(String nombre, String apellido,String email) {
+        view.onSuccessGetUserActual(nombre, apellido,email);
     }
 
     @Override

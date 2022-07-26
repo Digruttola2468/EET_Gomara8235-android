@@ -1,7 +1,7 @@
 package com.gomara.Presenter;
 
 public interface ActivitySettingUserPresenter {
-    void getUpdateUser(String nombre,String apellido,String email);
+    void getUpdateUser(String nombre,String apellido);
     void getUserActual();
 
 

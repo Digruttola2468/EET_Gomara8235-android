@@ -19,12 +19,12 @@ public class SettingUserServerImpl implements SettingUserServer{
     }
 
     @Override
-    public void getUpdateUser(String nombre, String apellido,String email) {
+    public void getUpdateUser(String nombre, String apellido) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         db.collection("User").document(auth.getUid())
                 .update("nombre",nombre,
-                        "apellido",apellido,"email",email)
+                        "apellido",apellido)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
