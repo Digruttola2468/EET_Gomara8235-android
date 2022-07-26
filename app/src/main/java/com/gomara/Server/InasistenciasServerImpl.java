@@ -56,6 +56,11 @@ public class InasistenciasServerImpl implements InasistenciasServer{
                     String anio = task.getResult().get("anio").toString();
                     String curso = task.getResult().get("curso").toString();
 
+                    boolean isPreseptor = false;
+                    if(task.getResult().contains("preseptor"))
+                        isPreseptor = task.getResult().getBoolean("preseptor");
+
+                    presenter.isPreseptor(isPreseptor);
                     presenter.showAnioCurso(anio,curso);
                 }
             }

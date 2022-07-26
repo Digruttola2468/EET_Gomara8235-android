@@ -29,6 +29,11 @@ public class InasistenciasPresenterImpl implements InasistenciasPresenter{
     }
 
     @Override
+    public void isPreseptor(boolean isPreseptor) {
+        view.isPreseptor(isPreseptor);
+    }
+
+    @Override
     public void showAnioCurso(String anio, String curso) {
         view.showAnioCurso(anio, curso);
     }

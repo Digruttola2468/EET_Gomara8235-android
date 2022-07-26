@@ -8,6 +8,7 @@ public interface InasistenciasPresenter {
 
     void showInasistencias(ArrayList<Alumno> allAlumnos);
     void getInasistencias(String anio,String curso);
+    void isPreseptor(boolean isPreseptor);
 
     void showAnioCurso(String anio,String curso);
     void getAnioCurso(String uid);
